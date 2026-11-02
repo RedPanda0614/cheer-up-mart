@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开心起来吧</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="开心起来吧">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&family=DotGothic16&family=Mochiy+Pop+One&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --cream:#fff8ee; --pink:#f5a3bb; --pinkL:#ffe1ea; --pinkD:#e2789a; --mint:#9fd8c2; --mintL:#e2f5ec;
+  --butter:#ffe08f; --butterL:#fff4cf; --lilac:#c6b3ea; --lilacL:#efe8fb; --sky:#a9d4f5;
+  --ink:#6b4a3e; --soft:#a08679; --line:#f2cbd6;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;max-width:100%}
+body{touch-action:pan-y pinch-zoom}
+.wrap{overflow-x:clip}
+body{
+  margin:0;color:var(--ink);font-family:"Noto Sans SC",system-ui,sans-serif;font-size:15px;line-height:1.7;
+  background-color:#fffaf3;
+  background-image:
+    linear-gradient(90deg, rgba(245,163,187,.16) 50%, transparent 50%),
+    linear-gradient(rgba(245,163,187,.16) 50%, transparent 50%);
+  background-size:28px 28px;
+}
+.jp{font-family:"Kiwi Maru",serif}
+.dot{font-family:"DotGothic16",monospace}
+.wrap{max-width:880px;margin:0 auto;padding:18px 14px 70px;position:relative}
+
+/* marquee */
+.marquee{background:var(--pink);color:#fff;border:2px solid var(--pinkD);border-radius:999px;overflow:hidden;white-space:nowrap;font-size:13px;padding:3px 0;margin-bottom:14px;box-shadow:0 3px 0 var(--pinkD)}
+.marquee span{display:inline-block;padding-left:100%;animation:mq 26s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+
+/* awning */
+.awning{height:34px;margin:0 6px -4px;position:relative;z-index:3;border:3px solid var(--ink);border-bottom:none;border-radius:14px 14px 0 0;
+  background:repeating-linear-gradient(90deg,#f37a9e 0 34px,#fff 34px 68px) 0 0/68px 100% border-box;background-origin:border-box}
+.awning:after{content:"";position:absolute;left:-3px;right:-3px;bottom:-16px;height:17px;
+  background:radial-gradient(circle at 17px 0,#f37a9e 16.5px,transparent 17.5px) 0 0/68px 17px repeat-x,radial-gradient(circle at 51px 0,#fff 16.5px,transparent 17.5px) 0 0/68px 17px repeat-x;
+  filter:drop-shadow(0 2px 0 var(--ink))}
+.shopname{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border:2.5px solid var(--ink);border-radius:8px;padding:0 14px;font-family:"Mochiy Pop One",sans-serif;font-size:13px;letter-spacing:2px;white-space:nowrap;box-shadow:2px 2px 0 var(--ink)}
+.shopname i{font-style:normal;color:#f37a9e}
+
+/* neon */
+.neonwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;position:relative;z-index:1}
+.neon{display:inline-flex;align-items:baseline;gap:8px;border:3px solid var(--ink);border-radius:12px;padding:6px 16px 4px;
+  background:linear-gradient(#fff,#eef8ff);box-shadow:3px 3px 0 var(--sky),inset 0 0 0 3px #fff,inset 0 0 0 5px #bfe3fb;
+  font-family:"Mochiy Pop One",sans-serif;color:#ff4f9a;text-shadow:0 0 1px #fff,0 0 6px rgba(255,79,154,.75),0 0 14px rgba(255,79,154,.45)}
+.neon b{font-weight:400;font-size:26px;letter-spacing:2px;color:#1aa8f0;text-shadow:0 0 1px #fff,0 0 6px rgba(26,168,240,.8),0 0 16px rgba(26,168,240,.45)}
+.neon .sl{font-size:18px;opacity:.85}
+.neon .hrt{animation:flick 3.4s infinite;font-size:18px}
+.neon .clr{display:none;font-size:13px;color:#f0a400;text-shadow:0 0 6px rgba(255,200,0,.8)}
+.neon.cleared .clr{display:inline}
+@keyframes flick{0%,19%,22%,62%,64%,100%{opacity:1}20%,21%,63%{opacity:.3}}
+.open{font-family:"Mochiy Pop One",sans-serif;font-size:11px;color:#16b866;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:1px 10px;text-shadow:0 0 6px rgba(22,200,110,.7);letter-spacing:2px}
+
+/* POP & tags */
+.burst{position:absolute;width:64px;height:64px;display:grid;place-items:center;text-align:center;font-family:"Mochiy Pop One",sans-serif;font-size:10px;line-height:1.15;color:#c62a4f;z-index:3;transform:rotate(12deg);
+  background:#ffe14d;clip-path:polygon(50% 0,59% 15%,75% 7%,77% 24%,93% 25%,86% 41%,100% 50%,86% 59%,93% 75%,77% 76%,75% 93%,59% 85%,50% 100%,41% 85%,25% 93%,23% 76%,7% 75%,14% 59%,0 50%,14% 41%,7% 25%,23% 24%,25% 7%,41% 15%)}
+.pop{font-family:"Mochiy Pop One",sans-serif}
+.tagp{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#fff7d6;border:1.5px solid var(--ink);border-radius:4px 10px 10px 4px;padding:0 8px 0 6px;margin-top:4px;position:relative}
+.tagp:before{content:"";width:5px;height:5px;border-radius:50%;border:1.5px solid var(--ink);background:#fff}
+
+/* receipt */
+.receipt{max-width:500px;margin:6px auto 4px;background:#fff;padding:26px 22px 22px;position:relative;font-family:"DotGothic16","Noto Sans SC",monospace;
+  filter:drop-shadow(3px 4px 0 rgba(107,74,62,.18));
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.receipt .rh{text-align:center}
+.receipt .rh .logo{font-family:"Mochiy Pop One",sans-serif;font-size:22px;letter-spacing:3px;color:#f37a9e}
+.receipt .rh small{display:block;font-size:11px;color:var(--soft)}
+.dash{border-top:2px dashed #cdb8ae;margin:10px 0}
+.r2{display:flex;justify-content:space-between;font-size:12px;color:var(--soft)}
+.rtotal{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin:6px 0}
+.barcode{display:block;margin:10px auto 4px;height:46px}
+.thanks{text-align:center;font-size:12px;color:var(--soft)}
+.receipt .shop h3,.receipt h3{font-family:"Noto Sans SC";background:none;border:none;padding:0;margin:12px 0 2px;font-size:13px;color:var(--soft);display:block}
+.receipt h3:before{content:"■ ";color:#f37a9e}
+
+/* point card */
+.pcard{background:linear-gradient(135deg,#fff 0%,#fff4f8 100%);border:2.5px solid var(--ink);border-radius:16px;padding:14px;position:relative;overflow:hidden}
+.pcard:before{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--butterL)}
+.pchead{display:flex;justify-content:space-between;align-items:center;position:relative;margin-bottom:10px}
+.pchead .logo{font-family:"Mochiy Pop One",sans-serif;font-size:15px;letter-spacing:2px}
+.pchead .logo i{font-style:normal;color:#f37a9e}
+.pchead .no{font-family:"DotGothic16",monospace;font-size:12px;color:var(--soft)}
+.cells{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:8px;position:relative}
+.cell{aspect-ratio:1;border:2px dashed #e6bfcb;border-radius:50%;display:grid;place-items:center;font-family:"DotGothic16",monospace;font-size:12px;color:#d2b3bd;position:relative;background:#fff}
+.cell.today{border-style:solid;border-color:var(--pink);color:var(--pinkD)}
+.cell.on{border:2.5px solid #e0526f;color:#e0526f;background:#fff5f7;font-family:"Kiwi Maru",serif;font-size:11px;transform:rotate(-10deg)}
+.cell.on:after{content:"";position:absolute;inset:3px;border:1px solid #e0526f;border-radius:50%;opacity:.6}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;cursor:pointer;border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:2px 12px}
+.chip.on{background:var(--pink);color:#fff}
+
+/* background deco */
+#deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#deco .dk{position:absolute;opacity:.9}
+#deco .sp{position:absolute;font-size:18px;line-height:1}
+.wrap{z-index:1}
+.ribbon{position:absolute;left:50%;transform:translateX(-50%);top:-14px;width:90px;height:22px;background:rgba(255,255,255,.75);border:1px dashed rgba(107,74,62,.3);z-index:4}
+
+/* book */
+.book{position:relative;margin:4px auto 0;max-width:820px;perspective:2200px}
+.book:before{content:"";position:absolute;inset:6px -6px -8px 6px;background:#e8cfc4;border:2px solid var(--ink);border-radius:8px 18px 18px 8px;z-index:0}
+.spread{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--ink);border:3px solid var(--ink);border-radius:10px;gap:0;z-index:1;height:600px}
+.page{position:relative;height:100%;background:#fffdf6;padding:26px 24px 34px;overflow:hidden;
+  background-image:linear-gradient(transparent 29px,#f6dfe6 30px);background-size:100% 30px;background-position:0 14px}
+.page.left{border-radius:8px 0 0 8px;box-shadow:inset -18px 0 22px -14px rgba(107,74,62,.35)}
+.page.right{border-radius:0 8px 8px 0;box-shadow:inset 18px 0 22px -14px rgba(107,74,62,.35)}
+.page .pn{position:absolute;bottom:8px;font-family:"DotGothic16",monospace;font-size:12px;color:var(--soft)}
+.page.left .pn{left:18px}.page.right .pn{right:18px}
+.page .corner{position:absolute;right:0;bottom:0;width:0;height:0;border-style:solid;border-width:0 0 26px 26px;border-color:transparent transparent #f1dcd3 transparent;filter:drop-shadow(-2px -2px 0 rgba(107,74,62,.15))}
+.page.left .corner{right:auto;left:0;border-width:26px 0 0 26px;border-color:transparent transparent transparent #f1dcd3}
+.page h3{font-family:"Noto Serif SC",serif;font-weight:700;font-size:24px;margin:6px 0 4px;color:var(--ink);line-height:1.3}
+.page .kicker{font-family:"Kiwi Maru",serif;font-size:12px;color:var(--pinkD);letter-spacing:2px}
+.page .tags{margin:4px 0 8px}
+.page .tag{display:inline-block;background:var(--butterL);border:1.5px solid var(--ink);border-radius:999px;padding:0 9px;font-size:11px;margin:0 4px 4px 0}
+.page .sec{display:inline-block;font-size:12px;font-weight:700;background:var(--mint);border:1.5px solid var(--ink);border-radius:6px;padding:0 8px;margin:10px 0 4px}
+.page .sec.p{background:var(--pinkL)}
+.page .ing{font-size:14px;line-height:30px}
+.page ol{list-style:none;padding:0;margin:0;counter-reset:st}
+.page ol li{counter-increment:st;position:relative;padding-left:30px;font-size:14px;line-height:30px;margin:0}
+.page ol li:before{content:counter(st);position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:var(--pink);color:#fff;font-size:12px;line-height:20px;text-align:center;border:1.5px solid var(--ink)}
+.page .pstk{position:absolute;right:16px;top:14px;transform:rotate(8deg);filter:drop-shadow(1px 2px 0 rgba(107,74,62,.25))}
+.page .tape{position:absolute;top:-6px;left:28px;width:70px;height:20px;transform:rotate(-6deg);opacity:.85;border:1px dashed rgba(107,74,62,.2)}
+.toc li{line-height:30px;font-size:14px;cursor:pointer;padding-left:22px}
+.toc li:hover{color:var(--pinkD)}
+.toc li span{float:right;font-family:"DotGothic16",monospace;color:var(--soft)}
+.cover-t{font-family:"Noto Serif SC",serif;font-weight:900;font-size:30px;color:#d6455d;text-shadow:2px 2px 0 #f5c9d4;letter-spacing:3px;margin:6px 0 0}
+.bookNav{display:flex;justify-content:center;align-items:center;gap:14px;margin:16px 0 6px}
+.bookNav .dot{min-width:70px;text-align:center}
+.flipping{pointer-events:none}
+.spread{transform-style:preserve-3d}
+.leaf{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;z-index:5;pointer-events:none}
+.leaf.r{left:50%;transform-origin:left center}
+.leaf.l{left:0;transform-origin:right center}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.leaf .face.back{transform:rotateY(180deg)}
+@media(max-width:640px){.spread{grid-template-columns:1fr;height:660px}.page.left{border-radius:8px}.spread .page.right{display:none}.page.left .pn{left:auto;right:18px}}
+
+/* header board */
+.board{position:relative;background:var(--cream);border:3px solid var(--ink);border-radius:22px;padding:22px 22px 18px;box-shadow:6px 6px 0 var(--pink);margin-bottom:18px;overflow:visible}
+.board:before{content:"";position:absolute;inset:7px;border:2px dashed var(--pink);border-radius:16px;pointer-events:none}
+.title{font-family:"Noto Serif SC",serif;font-weight:900;font-size:40px;line-height:1.25;margin:2px 0 4px;letter-spacing:5px;position:relative;z-index:1;color:#d6455d;text-shadow:3px 3px 0 #f5c9d4}
+.title .hl{padding:0}
+.kana{font-family:"Kiwi Maru",serif;color:var(--pinkD);font-size:14px;letter-spacing:3px}
+.counter{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#3b2b26;color:#9ff0a7;padding:3px 10px;border-radius:6px;font-family:"DotGothic16",monospace;font-size:14px;position:relative;z-index:1}
+.counter b{color:#fff59a;letter-spacing:2px}
+.status{font-size:11px;color:var(--soft);margin-top:6px;position:relative;z-index:1}
+
+/* stickers */
+.stk{position:absolute;filter:drop-shadow(1px 2px 0 rgba(107,74,62,.25));pointer-events:none;z-index:2}
+.stk svg{display:block}
+.float{animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px) rotate(var(--r,0deg))}}
+
+/* nav */
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px;padding-left:4px}
+nav button{-webkit-text-fill-color:currentColor;font:inherit;font-size:14px;cursor:pointer;border:2px solid var(--ink);background:#fff;color:var(--ink);padding:6px 14px 5px;border-radius:12px 12px 4px 4px;box-shadow:0 3px 0 var(--ink);transition:.1s}
+nav button:hover{background:var(--pinkL)}
+nav button:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+nav button.on{background:var(--pinkD);color:#fff}
+@media(hover:none){nav button:hover{background:#fff}nav button.on:hover{background:var(--pinkD)}}
+nav button .i{margin-right:3px}
+
+/* windows */
+.win{background:#fff;border:2px solid var(--ink);border-radius:14px;margin-bottom:18px;box-shadow:4px 4px 0 rgba(107,74,62,.18);position:relative}
+.win>.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 12px;border-bottom:2px solid var(--ink);border-radius:12px 12px 0 0;background:repeating-linear-gradient(90deg,var(--pinkL) 0 10px,#fff 10px 20px)}
+.win.mint>.bar{background:repeating-linear-gradient(90deg,var(--mintL) 0 10px,#fff 10px 20px)}
+.win.butter>.bar{background:repeating-linear-gradient(90deg,var(--butterL) 0 10px,#fff 10px 20px)}
+.win.lilac>.bar{background:repeating-linear-gradient(90deg,var(--lilacL) 0 10px,#fff 10px 20px)}
+.bar h2{margin:0;font-size:16px;font-weight:700}
+.bar h2 small{font-family:"Kiwi Maru",serif;font-weight:400;color:var(--pinkD);font-size:12px;margin-left:6px;letter-spacing:1px}
+.bar .btns{display:flex;gap:4px}
+.bar .btns i{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);display:block}
+.bar .btns i:nth-child(1){background:var(--butter)}.bar .btns i:nth-child(2){background:var(--mint)}.bar .btns i:nth-child(3){background:var(--pink)}
+.win>.body{padding:14px 16px}
+.sub{color:var(--soft);font-size:13px}
+
+/* meals */
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.meal{position:relative;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:10px 12px 10px 14px;cursor:pointer;transition:.12s;box-shadow:3px 3px 0 var(--c,var(--pink))}
+.meal:hover{transform:translate(-1px,-2px);box-shadow:5px 5px 0 var(--c,var(--pink))}
+.meal.B{--c:var(--butter)}.meal.L{--c:var(--mint)}.meal.D{--c:var(--lilac)}
+.meal .t{display:inline-block;font-family:"Kiwi Maru",serif;font-size:12px;padding:0 9px;border-radius:999px;background:var(--c);border:1.5px solid var(--ink)}
+.meal .n{font-size:15px;font-weight:700;margin-top:5px}
+.meal .m{font-size:12px;color:var(--soft)}
+
+/* small things */
+.todo{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.memo{position:relative;padding:14px 12px 12px;border-radius:4px;min-height:96px;cursor:pointer;box-shadow:2px 3px 0 rgba(107,74,62,.15);transition:.15s;border:1.5px solid rgba(107,74,62,.25)}
+.memo:nth-child(4n+1){background:var(--pinkL);transform:rotate(-1.2deg)}
+.memo:nth-child(4n+2){background:var(--mintL);transform:rotate(1deg)}
+.memo:nth-child(4n+3){background:var(--butterL);transform:rotate(-.6deg)}
+.memo:nth-child(4n+4){background:var(--lilacL);transform:rotate(1.4deg)}
+.memo:before{content:"";position:absolute;top:-8px;left:50%;width:54px;height:16px;margin-left:-27px;background:rgba(255,255,255,.7);border:1px dashed rgba(107,74,62,.25);transform:rotate(-3deg)}
+.memo .cat{font-family:"Kiwi Maru",serif;font-size:11px;color:var(--pinkD)}
+.memo b{display:block;font-size:15px;margin:2px 0}
+.memo span{font-size:12px;color:var(--soft)}
+.memo .stamp{position:absolute;right:8px;bottom:6px;width:46px;height:46px;border:2.5px solid #e0526f;color:#e0526f;border-radius:50%;display:none;align-items:center;justify-content:center;font-family:"Kiwi Maru",serif;font-size:12px;transform:rotate(-14deg);background:rgba(255,255,255,.6)}
+.memo.done .stamp{display:flex}
+.memo.done b{color:#b9a197}
+.pill{font:inherit;font-size:13px;cursor:pointer;border:2px solid var(--ink);background:var(--butter);color:var(--ink);padding:4px 14px;border-radius:999px;box-shadow:0 2px 0 var(--ink)}
+.pill:active{transform:translateY(2px);box-shadow:none}
+.pill.ghost{background:#fff}
+
+/* week */
+.days{display:flex;flex-direction:column;gap:12px}
+.dayrow{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:start}
+.dayrow .dl{font-weight:700;padding-top:12px;text-align:center}
+.dayrow .dl .d{display:inline-block;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:0 8px}
+.dayrow .dl small{display:block;font-weight:400;color:var(--soft);font-size:11px;font-family:"Kiwi Maru",serif}
+.dayrow.now .dl .d{background:var(--pink);color:#fff}
+.dayrow .ms{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.dayrow{grid-template-columns:1fr}.dayrow .dl{padding-top:0;text-align:left}.dayrow .ms{grid-template-columns:1fr}.title{font-size:24px}}
+
+/* shop */
+.shop h3{font-size:14px;margin:16px 0 6px;display:inline-block;background:var(--mint);border:2px solid var(--ink);border-radius:999px;padding:0 12px}
+.shop label{display:flex;gap:10px;align-items:center;padding:7px 10px;cursor:pointer;border-bottom:1.5px dotted var(--line)}
+.shop label.done span{text-decoration:line-through;color:#c7b3aa}
+.shop input{appearance:none;width:20px;height:20px;border:2px solid var(--ink);border-radius:6px;background:#fff;flex:none;cursor:pointer;display:grid;place-items:center}
+.shop input:checked{background:var(--pink)}
+.shop input:checked:after{content:"♡";color:#fff;font-size:12px;line-height:1}
+.shop .q{margin-left:auto;color:var(--soft);font-size:13px;text-align:right}
+.progress{height:12px;background:#fff;border:2px solid var(--ink);border-radius:999px;overflow:hidden;flex:1;min-width:120px}
+.progress i{display:block;height:100%;background:repeating-linear-gradient(45deg,var(--pink) 0 8px,var(--pinkL) 8px 16px);transition:.3s}
+
+/* recipes */
+.recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.rc{background:#fffdf8;border:2px solid var(--ink);border-radius:14px;padding:12px 14px;transition:.3s;position:relative;background-image:linear-gradient(transparent 27px,var(--line) 28px);background-size:100% 28px}
+.rc h3{margin:0;font-size:15px}
+.rc .tag{display:inline-block;background:var(--butterL);border:1.5px solid var(--ink);border-radius:999px;padding:0 8px;font-size:11px;margin:4px 4px 6px 0}
+.rc ol{margin:4px 0 0;padding-left:18px;font-size:13px}
+.rc .ing{font-size:13px;color:var(--soft)}
+.rc.flash{box-shadow:0 0 0 4px var(--pink)}
+
+.note{font-size:13px;color:var(--ink);background:var(--butterL);border:1.5px dashed var(--ink);padding:8px 12px;border-radius:10px;margin:10px 0 4px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input[type=number],input[type=date]{padding:7px 10px;border:2px solid var(--ink);border-radius:10px;font:inherit;background:#fff;color:var(--ink);width:150px}
+ul{margin:4px 0;padding-left:0;list-style:none}
+ul li{margin:4px 0;padding-left:20px;position:relative}
+ul li:before{content:"✿";position:absolute;left:0;color:var(--pink)}
+h3.h{font-size:15px;margin:14px 0 4px}
+h3.h:before{content:"★ ";color:var(--butter);-webkit-text-stroke:1px var(--ink)}
+.foods{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.food{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:9px 12px;font-size:13px}
+.food b{display:block;font-size:14px}
+.pool h3{display:inline-block;font-size:13px;margin:12px 0 6px;background:var(--lilacL);border:1.5px solid var(--ink);border-radius:999px;padding:0 10px}
+.pool .chips{display:flex;flex-wrap:wrap;gap:6px}
+.pool .chips span{font-size:13px;background:#fff;border:1.5px dashed var(--soft);border-radius:999px;padding:2px 10px}
+.scale{display:flex;gap:6px;margin-top:4px;max-width:340px}
+.scale button{color:var(--ink);flex:1;border:2px solid var(--ink);background:#fff;border-radius:10px;padding:4px 0;cursor:pointer;font-size:18px;line-height:1.4}
+.scale button.on{background:var(--pinkL);box-shadow:inset 0 0 0 2px var(--pink)}
+table{border-collapse:collapse;font-size:13px;width:100%}
+td,th{padding:6px;border-bottom:1.5px dotted var(--line);text-align:left}
+th{color:var(--soft);font-weight:500}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--soft);margin-bottom:4px}
+.legend i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-right:4px}
+.hidden{display:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(10px);background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--pink);color:var(--ink);padding:6px 18px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:9}
+.toast.show{opacity:1;transform:translateX(-50%)}
+footer{text-align:center;font-size:12px;color:var(--soft);margin-top:24px}
+footer .dot{color:var(--pinkD)}
+
+@media(max-width:600px){
+  .wrap{padding:10px 10px 50px}
+  .marquee{font-size:11px;margin-bottom:10px}
+  .awning{height:28px}
+  .shopname{font-size:11px;padding:0 10px}
+  .board{padding:24px 14px 12px;margin-bottom:14px}
+  .kana{font-size:11px;letter-spacing:1px}
+  .title{font-size:30px;letter-spacing:3px}
+  .board .sub{font-size:12px}
+  .board .stk[data-s="egg"]{display:none}
+  .board .stk[data-s="onigiri"]{right:12px!important;top:40px!important}
+  .board .stk[data-s="onigiri"] svg{width:48px}
+  .board .burst{left:auto!important;right:64px!important;top:52px!important;width:44px!important;height:44px!important;font-size:8px!important}
+  .neonwrap{margin-top:8px;gap:6px}
+  .neon{padding:3px 12px 2px}
+  .neon b{font-size:20px}
+  .open{font-size:9px;padding:0 8px}
+  .status{font-size:10px}
+  nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 6px;margin-bottom:14px;padding:0}
+  nav button{font-size:13px;padding:6px 4px 5px;white-space:nowrap}
+  .win>.body{padding:12px}
+  .three{grid-template-columns:repeat(3,1fr);gap:7px}
+  .meal{padding:8px 7px}
+  .meal .n{font-size:13px;line-height:1.35}
+  .tagp{font-size:10px;padding:0 5px 0 4px}
+  #today .burst{width:44px!important;height:44px!important;font-size:8px;right:-8px!important;top:-18px!important}
+  .todo{grid-template-columns:1fr 1fr;gap:10px}
+  .memo{min-height:84px;padding:12px 10px 10px}
+  .memo b{font-size:13px}
+  .cells{grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px}
+}
+
+.ed label{display:flex;flex-direction:column;font-size:13px;color:var(--soft);margin:6px 0}
+.ed input[type=text],.ed textarea,.ed select{font:inherit;font-size:14px;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:10px;padding:7px 10px;margin-top:3px;width:100%}
+.ed textarea{resize:vertical;line-height:1.6}
+.ed code{background:var(--pinkL);padding:0 5px;border-radius:4px;font-size:12px}
+.rrow{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1.5px dotted var(--line)}
+.rrow b{flex:1;font-weight:500}
+.rrow .sm{font-size:12px;padding:1px 10px}
+.rform{background:#fffdf6;border:2px dashed var(--pink);border-radius:12px;padding:10px 12px;margin:8px 0}
+.rform .two{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+.mrow{display:grid;grid-template-columns:44px repeat(3,1fr);gap:6px;align-items:center;margin:5px 0}
+.mrow b{font-size:13px}
+.mrow select{padding:5px 6px!important;font-size:13px!important}
+@media(max-width:600px){.rform .two{grid-template-columns:1fr 1fr}.mrow{grid-template-columns:34px repeat(3,1fr);gap:4px}.mrow select{font-size:11px!important;padding:4px 2px!important}}
+.btip{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;background:var(--butterL);border:2px dashed var(--ink);border-radius:12px;padding:8px 12px;font-size:13px}
+.btip span{flex:1;min-width:180px}
+.btip .pill{font-size:12px;padding:2px 12px}
+.btip.hidden{display:none}
+</style>
+</head>
+<body>
+<div id="deco"></div>
+<div class="wrap">
+  <div class="marquee jp"><span>☆ いらっしゃいませ〜 ☆ 今日もごはんをちゃんと食べようね ♡ 慢慢来 ♡ 吃饱饱 心情好好 ♪ 本日のおすすめ：番茄肥牛汤 ✿ 一日一善 ★ ポイント貯まります ☆ 今天也辛苦啦 ♡</span></div>
+  <div class="awning"><div class="shopname"><i>★</i> かるやかマート <i>★</i></div></div>
+
+  <div class="board">
+    <div class="kana">げんきだしてね ✿ CHEER UP PLAN</div>
+    <h1 class="title"><span class="hl" id="titleText">开心起来吧</span></h1>
+    <div class="burst" style="left:276px;top:38px;width:54px;height:54px;font-size:9px">NEW!<br>新登場</div>
+    <div class="sub" style="position:relative;z-index:1" id="subText">吃得简单 · 身体轻一点 · 心情亮一点</div>
+    <div class="neonwrap"><div class="neon" id="neon">DAY <b id="dayNum">001</b><span class="sl">/</span><b id="dayTot">030</b><span class="hrt">♡</span><span class="clr">CLEAR!</span></div><span class="open">OPEN 24H</span><button class="pill ghost" id="editBtn" style="font-size:12px;padding:2px 12px">✎ 自定义</button></div>
+    <div class="status" id="status">数据只保存在你自己的浏览器里 · 换设备记得先导出备份</div>
+    <div class="btip hidden" id="backupTip"><span>💾 已经 <b id="tipDays"></b> 天没备份啦，导出一份存起来吧</span><button class="pill" id="tipExport">导出备份</button><button class="pill ghost" id="tipLater">过几天再说</button></div>
+    <div class="stk float" style="right:26px;top:34px;--r:8deg" data-s="onigiri" data-w="70"></div>
+    <div class="stk float" style="right:112px;top:92px;animation-delay:.6s;--r:-6deg" data-s="egg" data-w="58"></div>
+    <div class="stk float" style="right:30px;bottom:-18px;animation-delay:1.2s" data-s="star" data-w="44"></div>
+    <div class="stk" style="left:-14px;top:-16px;transform:rotate(-12deg)" data-s="strawberry" data-w="44"></div>
+  </div>
+
+  <nav id="nav">
+    <button data-v="today" class="on"><span class="i">🍙</span>今天</button>
+    <button data-v="week"><span class="i">📅</span>一周菜单</button>
+    <button data-v="shop"><span class="i">🧺</span>买菜清单</button>
+    <button data-v="recipes"><span class="i">📖</span>菜谱</button>
+    <button data-v="mood"><span class="i">🌷</span>心情</button>
+    <button data-v="log"><span class="i">✏️</span>记录</button>
+  </nav>
+
+  <!-- 今天 -->
+  <section id="v-today">
+    <div class="win">
+      <div class="stk" style="left:-18px;top:-18px;transform:rotate(-14deg)" data-s="tomato" data-w="42"></div>
+      <div class="bar"><h2 id="todayTitle">今天吃什么<small>きょうのごはん</small></h2><div class="btns"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <div class="three" id="today"></div>
+        <div class="sub" style="margin-top:8px">点一顿看做法 ♪</div>
+      </div>
+    </div>
+    <div class="win butter">
+      <div class="bar"><h2>今天的小事<small>きょうのちいさなこと</small></h2><div class="row" style="gap:6px"><button class="pill" id="reroll">换一批 ↻</button></div></div>
+      <div class="body" style="position:relative">
+        <p class="sub" style="margin:0 0 14px">每天随机抽 4 件，做到一件就很好了。做完点一下，盖个章。</p>
+        <div class="todo" id="small"></div>
+        <div class="stk" style="right:-16px;bottom:-22px;transform:rotate(10deg)" data-s="tea" data-w="56"></div>
+      </div>
+    </div>
+    <div class="win lilac">
+      <div class="stk float" style="right:-14px;top:-24px;--r:10deg" data-s="heart" data-w="40"></div>
+      <div class="bar"><h2>积分卡<small>ポイントカード</small></h2><span class="dot" id="cardCount"></span></div>
+      <div class="body">
+        <div class="pcard">
+          <div class="pchead"><span class="logo"><i>♥</i> KARUYAKA CLUB</span><span class="no" id="cardNo"></span></div>
+          <div class="cells" id="cells"></div>
+        </div>
+        <p class="sub" style="margin:8px 0 0">当天做完至少一件小事，就会自动盖一个章 ✿</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 一周 -->
+  <section id="v-week" class="hidden">
+    <div class="win mint">
+      <div class="stk" style="right:-14px;top:-26px;transform:rotate(8deg)" data-s="milk" data-w="40"></div>
+      <div class="bar"><h2>一周菜单<small>こんしゅうのこんだて</small></h2><div class="btns"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <p class="sub" style="margin-top:0">每周都一样，一直循环，不用想。</p>
+        <div class="days" id="days"></div>
+        <div class="note" id="cookTotal"></div>
+      </div>
+    </div>
+    <div class="win">
+      <div class="bar"><h2>吃腻了可以换<small>かえっこ</small></h2></div>
+      <div class="body"><ul>
+        <li>肥牛换成火锅片羊肉，或者冷冻虾仁。</li>
+        <li>番茄肥牛汤换成番茄豆腐虾仁汤，做法一样。</li>
+        <li>烤鸡换成超市的熟卤牛肉，或者一罐金枪鱼。</li>
+        <li>任何一顿不想做，就换成「冷冻饺子 + 烫青菜」。</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 买菜 -->
+  <section id="v-shop" class="hidden">
+    <div class="win mint shop">
+      <div class="bar"><h2>买菜清单<small>おかいもの</small></h2><button class="pill ghost" id="shopReset">清空</button></div>
+      <div class="body" style="position:relative">
+        <div class="note">一个人一周的量，周末买一次。标了「多周」的买一次能用好几周，家里还有就跳过。</div>
+        <div class="receipt">
+          <div class="rh"><div class="logo">かるやかマート</div><small>KARUYAKA MART · 本日もご来店ありがとうございます</small></div>
+          <div class="dash"></div>
+          <div class="r2"><span id="rDate"></span><span>レジ 01 · 担当 ♡</span></div>
+          <div class="dash"></div>
+          <div id="shopList"></div>
+          <div class="dash"></div>
+          <div class="row" style="margin:6px 0"><div class="progress"><i id="shopBar" style="width:0"></i></div></div>
+          <div class="rtotal"><span>合計</span><span id="shopCount"></span></div>
+          <div class="r2"><span>お会計</span><span>¥0（心情加分）</span></div>
+          <svg class="barcode" id="barcode" viewBox="0 0 220 46" width="220"></svg>
+          <div class="thanks">お買い上げありがとうございました ♡<br>またのお越しをお待ちしております</div>
+        </div>
+        <div class="stk" style="right:-12px;top:-30px;transform:rotate(12deg)" data-s="strawberry" data-w="50"></div>
+      </div>
+    </div>
+    <div class="win butter">
+      <div class="bar"><h2>家里常备<small>ストック</small></h2></div>
+      <div class="body sub" id="pantry"></div>
+    </div>
+  </section>
+
+  <!-- 菜谱 -->
+  <section id="v-recipes" class="hidden">
+    <div class="win lilac">
+      <div class="stk" style="right:-12px;top:-28px;transform:rotate(10deg)" data-s="bowl" data-w="54"></div>
+      <div class="bar"><h2>菜谱<small>レシピ</small></h2><div class="btns"><i></i><i></i><i></i></div></div>
+      <div class="body">
+        <p class="sub" style="margin-top:0">肉都是直接下锅煮或者买现成的，没有要腌、要烤的。点两边翻页，或者用键盘 ← →。</p>
+        <div class="book"><div class="spread" id="spread"><div class="page left" id="pL"></div><div class="page right" id="pR"></div></div></div>
+        <div class="bookNav"><button class="pill ghost" id="prevP">◀ 上一页</button><span class="dot" id="pageNo"></span><button class="pill" id="nextP">下一页 ▶</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 心情 -->
+  <section id="v-mood" class="hidden">
+    <div class="win butter">
+      <div class="stk float" style="left:-16px;top:-22px;--r:-8deg" data-s="flower" data-w="46"></div>
+      <div class="bar"><h2>小事清单<small>ぜんぶ</small></h2></div>
+      <div class="body pool">
+        <p class="sub" style="margin-top:0">「今天的小事」就是从这里每天抽出来的。想自己挑也可以。</p>
+        <div id="pool"></div>
+      </div>
+    </div>
+    <div class="win mint">
+      <div class="bar"><h2>冬天的光<small>ひかり</small></h2></div>
+      <div class="body">
+        <ul>
+          <li>早上起床半小时内出门，或者站在窗边 10 分钟。阴天也有用。</li>
+          <li>想多一点帮助，可以买一盏 <b>10000 lux 的光疗灯</b>，早上吃早饭的时候开 20–30 分钟。冬季低落用这个效果挺好，一般 1–2 周开始有感觉。</li>
+          <li>每天差不多同一个时间起床，周末也是，差不超过 1 小时。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="win">
+      <div class="bar"><h2>对心情好的食物<small>げんきのたべもの</small></h2></div>
+      <div class="body">
+        <p class="sub" style="margin-top:0">有研究让抑郁的人换成地中海式饮食（多吃菜、豆、鱼、坚果、全谷物，少吃加工食品和甜食），12 周后症状明显减轻，改得越多效果越好。菜单里已经放进去了。</p>
+        <div class="foods" id="foods"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 记录 -->
+  <section id="v-log" class="hidden">
+    <div class="win">
+      <div class="bar"><h2>想记的时候记一下<small>きろく</small></h2><div class="btns"><i></i><i></i><i></i></div></div>
+      <div class="body" style="position:relative">
+        <p class="sub" style="margin-top:0">不用每天。早上起床空腹称一次就行，体重每天上下浮动 0.5–1 kg 都正常。</p>
+        <div class="row" style="align-items:flex-end">
+          <label class="sub">日期<br><input type="date" id="lDate"></label>
+          <label class="sub">体重 kg<br><input type="number" id="lWeight" step="0.1" placeholder="选填"></label>
+        </div>
+        <div style="margin-top:12px" class="sub">心情怎么样？</div>
+        <div class="scale" data-s="mood" data-e="🌧️,☁️,⛅,🌤️,🌈"></div>
+        <button class="pill" id="lSave" style="margin-top:14px;background:var(--pink);color:#fff">记下 ♡</button>
+        <div class="stk" style="right:10px;top:40px;transform:rotate(-8deg)" data-s="cloud" data-w="80"></div>
+      </div>
+    </div>
+    <div class="win lilac">
+      <div class="bar"><h2>变化<small>グラフ</small></h2></div>
+      <div class="body">
+        <div class="legend"><span><i style="background:var(--pinkD)"></i>体重</span><span><i style="background:#9a83cf"></i>心情</span></div>
+        <div id="lChart"></div>
+        <table id="lTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 自定义 -->
+  <section id="v-edit" class="hidden">
+    <div class="win butter">
+      <div class="bar"><h2>基本设置<small>きほん</small></h2><button class="pill ghost" id="editDone">完成 ✓</button></div>
+      <div class="body ed">
+        <label>标题<input type="text" id="eTitle" maxlength="20"></label>
+        <label>副标题<input type="text" id="eSub" maxlength="40"></label>
+        <div class="sub" style="margin-top:8px">计划天数</div>
+        <div class="row" style="margin:4px 0 8px"><div class="chips" id="durChips"></div><input type="number" id="durInput" min="1" max="365" style="width:90px" placeholder="自定义"><span class="sub">天</span></div>
+        <label>开始日期<input type="date" id="startDate"></label>
+        <label>周末备菜小贴士（显示在一周菜单下面）<textarea id="ePrep" rows="2"></textarea></label>
+        <div class="row" style="margin-top:10px"><button class="pill" id="saveBasic" style="background:var(--pink);color:#fff">保存</button><button class="pill ghost" id="restart">从今天重新开始</button></div>
+      </div>
+    </div>
+    <div class="win lilac">
+      <div class="bar"><h2>菜谱<small>レシピ</small></h2><button class="pill" id="addRecipe">+ 新菜谱</button></div>
+      <div class="body ed"><div id="recipeEd"></div></div>
+    </div>
+    <div class="win mint">
+      <div class="bar"><h2>一周菜单<small>こんだて</small></h2></div>
+      <div class="body ed"><p class="sub" style="margin-top:0">从菜谱里选，选「自由餐」就是外食或随便吃。</p><div id="menuEd"></div><button class="pill" id="saveMenu" style="margin-top:10px;background:var(--pink);color:#fff">保存菜单</button></div>
+    </div>
+    <div class="win">
+      <div class="bar"><h2>买菜清单 &amp; 家里常备<small>おかいもの</small></h2></div>
+      <div class="body ed">
+        <p class="sub" style="margin-top:0">格式：<code>## 分类名</code> 另起一行，下面每行一样东西，用 <code>|</code> 隔开数量。</p>
+        <textarea id="eShop" rows="12"></textarea>
+        <label>家里常备（随便写）<textarea id="ePantry" rows="2"></textarea></label>
+        <button class="pill" id="saveShop" style="margin-top:8px;background:var(--pink);color:#fff">保存</button>
+      </div>
+    </div>
+    <div class="win butter">
+      <div class="bar"><h2>小事清单<small>ちいさなこと</small></h2></div>
+      <div class="body ed">
+        <p class="sub" style="margin-top:0">格式同上：<code>## 分类名</code>，下面每行 <code>事情 | 一句说明</code>。每天会从不同分类里随机抽 4 件。</p>
+        <textarea id="ePool" rows="12"></textarea>
+        <button class="pill" id="savePool" style="margin-top:8px;background:var(--pink);color:#fff">保存</button>
+      </div>
+    </div>
+    <div class="win mint">
+      <div class="bar"><h2>备份<small>バックアップ</small></h2></div>
+      <div class="body ed">
+        <p class="sub" style="margin-top:0">数据只存在这个浏览器里。换手机、换浏览器之前先导出，到新的地方再导入。</p>
+        <div class="row"><button class="pill" id="exportBtn">⬇ 导出备份文件</button><button class="pill ghost" id="copyBtn">复制备份文字</button></div>
+        <div class="row" style="margin-top:10px"><label class="pill ghost" style="cursor:pointer">⬆ 导入备份文件<input type="file" id="importFile" accept=".json,application/json" hidden></label></div>
+        <textarea id="importBox" rows="3" placeholder="也可以把备份文字粘贴到这里" style="margin-top:10px"></textarea>
+        <div class="row" style="margin-top:6px"><button class="pill ghost" id="importText">从文字导入</button><button class="pill ghost" id="resetAll" style="margin-left:auto;color:#c33">恢复默认内容</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer><span class="dot">♡ since 2026.11 ♡</span><br>今天也辛苦啦</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ================= 菜谱 =================
+const R = {
+  eggtoast:{n:'水煮蛋 + 吐司',type:'早餐 · 不开火',min:0,ing:'备好的水煮蛋 2 个、全麦吐司 2 片、牛奶或无糖豆浆、一个水果',steps:['鸡蛋剥开，蘸烧椒酱或者撒点盐','吐司烤一下（不烤也行）','配一杯牛奶或豆浆，再吃个水果']},
+  yogurt:{n:'酸奶碗',type:'早餐 · 不开火',min:0,ing:'无糖希腊酸奶一大勺、燕麦片或低糖格兰诺拉、蓝莓、核桃几颗',steps:['酸奶舀进碗里','撒燕麦片、蓝莓和核桃，直接吃']},
+  salmontoast:{n:'烟熏三文鱼吐司',type:'早餐 · 不开火',min:0,ing:'烟熏三文鱼 2–3 片、全麦吐司、黄瓜、水煮蛋 1 个',steps:['吐司上铺黄瓜片和三文鱼','配一个水煮蛋']},
+  chickenbowl:{n:'烤鸡饭碗',type:'午餐 · 不开火',min:3,ing:'超市现成烤鸡一份、米饭一盒、生菜、黄瓜、烧椒酱',steps:['烤鸡撕一份下来，和饭一起微波热 2 分钟','放生菜、黄瓜','拌一勺烧椒酱']},
+  tomatobeef:{n:'番茄肥牛汤',type:'一锅煮 · 做两顿',min:15,ing:'肥牛片约 250 g、番茄 3 个、菌菇一把、葱',steps:['番茄切块，少许油炒到出汁','加两碗水煮开，放菌菇','下肥牛片，变色就关火，加盐和葱花','一半今晚配饭吃，一半装盒明天中午吃']},
+  shrimpegg:{n:'虾仁炒蛋 + 烫青菜',type:'快手',min:10,ing:'冷冻虾仁一把、鸡蛋 2 个、青菜一把',steps:['烧一小锅水，青菜烫 1 分钟捞出，淋生抽和香油','虾仁直接下锅炒到变色','倒入打散的鸡蛋，炒熟加盐','配一盒饭']},
+  misosalmon:{n:'味噌三文鱼豆腐汤',type:'一锅煮',min:10,ing:'冷冻三文鱼一块、嫩豆腐半盒、菌菇、青菜、味噌一大勺',steps:['一锅水煮开','三文鱼切块（冻着也能切）、豆腐、菌菇下锅煮 6 分钟','关火，味噌用汤化开倒回去','放青菜烫一下，配饭吃']},
+  hotpot:{n:'一人小火锅',type:'一锅煮',min:10,ing:'一人份火锅底料（番茄或清汤都行）、剩下的肥牛、豆腐、菌菇、青菜',steps:['小锅里放底料加水煮开','依次下菌菇、豆腐、肥牛、青菜','烧椒酱加点生抽当蘸料']},
+  tomatoegg:{n:'番茄炒蛋 + 烫青菜',type:'快手',min:10,ing:'番茄 2 个、鸡蛋 3 个、青菜一把',steps:['鸡蛋炒散盛出','番茄炒出汁，鸡蛋回锅，加盐和一点糖','青菜烫一下淋生抽','配饭']},
+  dumpling:{n:'冷冻饺子 + 烫青菜',type:'备用懒人餐',min:8,ing:'冷冻饺子 10–12 个、青菜一把',steps:['水开下饺子，浮起来再煮 2 分钟','同锅最后放青菜','蘸醋或烧椒酱']},
+  beefleft:{n:'番茄肥牛汤（昨晚剩的）',type:'加热就好',min:0,ing:'昨晚装好的那盒汤、一盒饭',steps:['汤和饭一起热 2–3 分钟']},
+  eggrice:{n:'鸡蛋拌饭碗',type:'午餐 · 不开火',min:0,ing:'米饭一盒、水煮蛋 2 个、黄瓜、烧椒酱或泡菜、一点香油',steps:['饭热一下','鸡蛋切开放上面，配黄瓜','加烧椒酱或泡菜，淋几滴香油拌着吃']},
+  free:{n:'自由餐',type:'放松',min:0,ing:'',steps:['外面吃，或者吃想吃的东西','正常吃，不用补偿']},
+};
+const MENU=[
+  ['eggtoast','chickenbowl','tomatobeef'],
+  ['yogurt','beefleft','shrimpegg'],
+  ['eggtoast','chickenbowl','misosalmon'],
+  ['salmontoast','chickenbowl','hotpot'],
+  ['yogurt','eggrice','free'],
+  ['eggtoast','free','tomatoegg'],
+  ['yogurt','free','chickenbowl'],
+];
+
+// ================= 买菜 =================
+const SHOP=[
+  ['肉蛋奶',[['超市现成整只烤鸡','1 只（周日买）'],['肥牛片 / 火锅片','1 盒 约 400 g'],['冷冻虾仁','1 袋 · 多周'],['冷冻三文鱼块','1 袋 · 多周'],['烟熏三文鱼','1 小包'],['嫩豆腐','1 盒'],['鸡蛋','18 个'],['无糖希腊酸奶','1 大盒'],['牛奶或无糖豆浆','1 盒']]],
+  ['主食',[['全麦吐司','1 袋'],['燕麦片或低糖格兰诺拉','1 袋 · 多周'],['冷冻饺子','1 袋 · 多周']]],
+  ['蔬菜',[['番茄','5 个'],['青菜（菠菜、小白菜都行）','2 袋'],['生菜','1 颗'],['黄瓜','3 根'],['菌菇（金针菇、蘑菇都行）','1–2 盒'],['葱','一小把']]],
+  ['水果和零食',[['蓝莓（冷冻也行）','1 盒'],['香蕉、橙子、苹果','随意'],['核桃','1 袋 · 多周'],['黑巧克力 70% 以上','1 板']]],
+];
+const PANTRY='米（懒的话买微波即食米饭）· 烧椒酱 · 味噌 · 一人份火锅底料 · 生抽 · 香油 · 盐 · 醋 · 可选：一小罐韩式泡菜配饭';
+
+
+const FOODS=[
+  ['三文鱼等深海鱼','含 EPA 和 DHA，研究最多的「情绪营养」。每周 2 次。'],
+  ['核桃等坚果','植物来源的 omega-3，当零食吃一小把。'],
+  ['鸡蛋','有胆碱和维生素 B12，都和大脑有关。'],
+  ['深绿色蔬菜','菠菜、小白菜里有叶酸，缺叶酸和情绪低落有关。'],
+  ['酸奶、味噌、泡菜','发酵食物，养肠道菌群。肠道和大脑互相影响。'],
+  ['蓝莓等浆果','多酚多，也很好吃。'],
+  ['全谷物','燕麦、全麦吐司，让能量更平稳，不容易下午崩。'],
+  ['黑巧克力 70%+','每天一小块，是让自己开心一下的东西，不用有负担。'],
+];
+
+
+// ================= 原创贴纸 =================
+const O='#6b4a3e';
+const face=(cx,cy,s=1)=>`<circle cx="${cx-7*s}" cy="${cy}" r="${2.2*s}" fill="${O}"/><circle cx="${cx+7*s}" cy="${cy}" r="${2.2*s}" fill="${O}"/><path d="M${cx-3*s} ${cy+4*s} q${3*s} ${3*s} ${6*s} 0" stroke="${O}" stroke-width="${1.8*s}" fill="none" stroke-linecap="round"/><ellipse cx="${cx-12*s}" cy="${cy+4*s}" rx="${3.5*s}" ry="${2.2*s}" fill="#f7a1b5" opacity=".8"/><ellipse cx="${cx+12*s}" cy="${cy+4*s}" rx="${3.5*s}" ry="${2.2*s}" fill="#f7a1b5" opacity=".8"/>`;
+const STK={
+  onigiri:`<svg viewBox="0 0 100 92"><path d="M50 6 C60 6 96 66 92 78 C88 90 12 90 8 78 C4 66 40 6 50 6Z" fill="#fff" stroke="${O}" stroke-width="4" paint-order="stroke"/><path d="M50 6 C60 6 96 66 92 78 C88 90 12 90 8 78 C4 66 40 6 50 6Z" fill="#fff" stroke="#fff" stroke-width="10" opacity="0"/><rect x="32" y="62" width="36" height="26" rx="3" fill="#3d4a3a" stroke="${O}" stroke-width="3"/>${face(50,48,1)}</svg>`,
+  egg:`<svg viewBox="0 0 100 90"><path d="M14 46 C6 24 30 8 48 14 C64 4 94 16 88 40 C98 60 78 84 54 78 C32 90 6 72 14 46Z" fill="#fff" stroke="${O}" stroke-width="4"/><circle cx="50" cy="44" r="20" fill="#ffd25e" stroke="${O}" stroke-width="3.5"/>${face(50,42,.75)}</svg>`,
+  star:`<svg viewBox="0 0 100 100"><path d="M50 6 L62 36 L94 38 L69 58 L78 90 L50 72 L22 90 L31 58 L6 38 L38 36Z" fill="#ffe08f" stroke="${O}" stroke-width="4" stroke-linejoin="round"/>${face(50,52,.8)}</svg>`,
+  strawberry:`<svg viewBox="0 0 100 104"><path d="M50 98 C20 86 8 58 14 40 C20 24 40 26 50 30 C60 26 80 24 86 40 C92 58 80 86 50 98Z" fill="#f7768f" stroke="${O}" stroke-width="4"/><path d="M30 24 L42 30 L50 16 L58 30 L70 24 L64 36 L36 36Z" fill="#8fd18a" stroke="${O}" stroke-width="3.5" stroke-linejoin="round"/>${[[32,52],[68,52],[42,72],[58,72],[50,86],[26,66],[74,66]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="1.8" ry="2.6" fill="#ffe9a8"/>`).join('')}${face(50,58,.75)}</svg>`,
+  tea:`<svg viewBox="0 0 100 100"><path d="M40 10 q-6 8 0 14 q6 6 0 12" stroke="#f5a3bb" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M56 10 q-6 8 0 14 q6 6 0 12" stroke="#f5a3bb" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M14 42 H80 V62 C80 82 66 92 47 92 C28 92 14 82 14 62Z" fill="#a9d4f5" stroke="${O}" stroke-width="4"/><path d="M80 50 C96 50 96 74 78 72" fill="none" stroke="${O}" stroke-width="4"/>${face(47,62,.8)}</svg>`,
+  cloud:`<svg viewBox="0 0 120 80"><path d="M24 66 C8 66 6 44 22 42 C20 24 44 18 52 30 C58 12 88 14 90 34 C108 32 116 58 98 66Z" fill="#fff" stroke="${O}" stroke-width="4" stroke-linejoin="round"/>${face(60,48,.85)}</svg>`,
+  tomato:`<svg viewBox="0 0 100 96"><circle cx="50" cy="56" r="38" fill="#ff7a6b" stroke="${O}" stroke-width="4"/><path d="M50 22 L44 10 M30 22 L50 26 L70 22 L62 32 L50 28 L38 32Z" fill="#8fd18a" stroke="${O}" stroke-width="3.5" stroke-linejoin="round"/><ellipse cx="34" cy="44" rx="6" ry="4" fill="#fff" opacity=".6"/>${face(50,60,.8)}</svg>`,
+  milk:`<svg viewBox="0 0 80 110"><path d="M14 36 L24 14 H56 L66 36 V100 H14Z" fill="#fff" stroke="${O}" stroke-width="4" stroke-linejoin="round"/><path d="M24 14 V6 H56 V14" fill="#fff" stroke="${O}" stroke-width="4"/><rect x="14" y="56" width="52" height="26" fill="#a9d4f5" stroke="${O}" stroke-width="3"/><text x="40" y="74" font-size="12" text-anchor="middle" fill="${O}" font-family="sans-serif" font-weight="700">MILK</text>${face(40,44,.6)}</svg>`,
+  flower:`<svg viewBox="0 0 100 100">${[0,72,144,216,288].map(a=>`<ellipse cx="50" cy="26" rx="15" ry="20" fill="#ffc2d4" stroke="${O}" stroke-width="3.5" transform="rotate(${a} 50 50)"/>`).join('')}<circle cx="50" cy="50" r="16" fill="#ffe08f" stroke="${O}" stroke-width="3.5"/>${face(50,50,.5)}</svg>`,
+  bowl:`<svg viewBox="0 0 110 90"><path d="M30 34 q6 -14 0 -26 M48 34 q6 -14 0 -26 M66 34 q6 -14 0 -26" stroke="#f5a3bb" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="55" cy="40" rx="44" ry="10" fill="#fff" stroke="${O}" stroke-width="4"/><path d="M11 40 C14 70 34 84 55 84 C76 84 96 70 99 40" fill="#ffd0dc" stroke="${O}" stroke-width="4"/><path d="M84 30 L104 6 M90 32 L108 12" stroke="${O}" stroke-width="3.5" stroke-linecap="round"/>${face(55,62,.75)}</svg>`,
+  mushroom:`<svg viewBox="0 0 100 100"><path d="M10 50 C10 20 90 20 90 50Z" fill="#ff8aa6" stroke="${O}" stroke-width="4" stroke-linejoin="round"/><circle cx="34" cy="38" r="6" fill="#fff"/><circle cx="62" cy="34" r="5" fill="#fff"/><circle cx="74" cy="44" r="3.5" fill="#fff"/><path d="M32 50 H68 V82 C68 92 32 92 32 82Z" fill="#fff4e6" stroke="${O}" stroke-width="4"/>${face(50,66,.6)}</svg>`,
+  sparkle:`<svg viewBox="0 0 100 100"><path d="M50 4 C54 38 62 46 96 50 C62 54 54 62 50 96 C46 62 38 54 4 50 C38 46 46 38 50 4Z" fill="#fff59a" stroke="${O}" stroke-width="4" stroke-linejoin="round"/></svg>`,
+  heart:`<svg viewBox="0 0 100 92"><path d="M50 88 C20 66 4 50 8 30 C12 10 38 6 50 26 C62 6 88 10 92 30 C96 50 80 66 50 88Z" fill="#ffb3c6" stroke="${O}" stroke-width="4"/>${face(50,44,.8)}</svg>`,
+};
+function placeStickers(root=document){root.querySelectorAll('.stk[data-s]').forEach(el=>{if(el.dataset.done)return;el.dataset.done=1;el.innerHTML=STK[el.dataset.s];el.firstChild.setAttribute('width',el.dataset.w||50);});}
+
+
+const POOL={
+  '晒晒太阳':[
+    ['拉开窗帘晒 10 分钟','站窗边就行，阴天也有用'],['出门走一圈','15 分钟，不用走快'],['走另一条路回家','换个风景'],['去楼下买杯喜欢的饮料','顺便见见光'],['拍一张今天的天空','什么样的天都可以'],['午饭后在外面站 5 分钟','吹吹风'],
+  ],
+  '身体舒服':[
+    ['伸个懒腰，拉伸 3 分钟','肩膀和腰都转一转'],['喝一杯温水','慢慢喝'],['洗个热水澡','洗完换上舒服的衣服'],['睡前泡脚 10 分钟','水温热一点'],['比平时早睡 30 分钟','手机放远一点'],['跟着一首歌晃一晃','关上门没人看见'],['躺着做 5 个臀桥','不出汗的那种'],
+  ],
+  '和人说说话':[
+    ['给朋友发一张今天的照片','不用配文字'],['回一条拖了很久的消息','回完就轻松了'],['给家里打 5 分钟电话','聊聊吃了什么就行'],['找同学一起吃顿饭','食堂也可以'],['夸一个人一句','真心的就行'],['跟喜欢的人说一件今天的小事','好的坏的都行'],
+  ],
+  '小确幸':[
+    ['慢慢吃一块黑巧克力','认真尝味道'],['听一首很久没听的老歌','高中时听的那种'],['看一集喜欢的动画','不用有负罪感'],['去咖啡店坐 20 分钟','带本闲书或者发呆'],['买一小束花','超市的就很好'],['换一张好看的壁纸','手机或者电脑'],['画一个小涂鸦','画得丑也没关系'],['去图书馆随手翻一本闲书','不是专业书'],
+  ],
+  '整理一下':[
+    ['收拾桌面 5 分钟','只收拾一个角落也行'],['扔掉三样不要的东西','旧单据、空瓶子都算'],['把明天要穿的衣服放好','早上少想一件事'],['把水槽里的碗洗了','洗完厨房亮了'],['清空电脑的下载文件夹','顺手的小清爽'],['换一套干净床单','今晚睡得香'],
+  ],
+  '对自己好一点':[
+    ['深呼吸 5 次','吸 4 秒，呼 6 秒'],['对自己说一句「辛苦了」','说出声也可以'],['写一句今天还不错的事','备忘录写一行就好'],['把一件担心的事写下来','写完合上，明天再想'],['10 分钟不看手机','发会儿呆'],['今天只要完成一件事就算赢','其他的明天再说'],
+  ],
+};
+
+
+// ================= helpers =================
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const todayStr=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);};
+const DAYJ=['月','火','水','木','金','土','日'];
+const dow=()=>(new Date(todayStr()).getUTCDay()+6)%7;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1700);}
+function seedRand(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+function addDays(d,k){const x=new Date(d);x.setUTCDate(x.getUTCDate()+k);return x.toISOString().slice(0,10);}
+const clone=o=>JSON.parse(JSON.stringify(o));
+
+// ================= 默认内容 =================
+function buildDefaults(){
+  const recipes={};
+  Object.entries(R).forEach(([k,r])=>{
+    if(k==='free'||k==='beefleft')return;
+    recipes[k]={n:r.n,type:r.type,min:r.min||0,reheat:k==='chickenbowl',
+      ing:r.ing.replace(/烧椒酱/g,'喜欢的辣酱').split('、').filter(Boolean),
+      steps:r.steps.map(x=>x.replace(/烧椒酱/g,'辣酱'))};
+  });
+  const menu=MENU.map(row=>row.map(id=>id==='beefleft'?'eggrice':id));
+  menu[3][1]='chickenbowl'; menu[4][1]='dumpling';
+  return {
+    title:'开心起来吧', sub:'吃得简单 · 身体轻一点 · 心情亮一点', duration:30, start:'',
+    prep:'周末动手 5 分钟：电饭煲煮一锅饭，好了分盒冷冻；小锅煮 10 个鸡蛋放冰箱。两样都不用守着。',
+    recipes, menu,
+    shop:SHOP.map(([c,items])=>[c,items.map(([n,q])=>[n,q])]),
+    pantry:PANTRY.replace('烧椒酱','喜欢的辣酱'),
+    pool:clone(POOL),
+  };
+}
+const DEFAULT=buildDefaults();
+
+// ================= storage (localStorage only) =================
+const KC='happy_cfg_v1', KS='happy_state_v1';
+let cfg, st;
+function load(){
+  try{cfg=Object.assign(clone(DEFAULT),JSON.parse(localStorage.getItem(KC)||'{}'));}catch(e){cfg=clone(DEFAULT);}
+  try{st=Object.assign({shop:{},logs:{},dones:{},rolls:{}},JSON.parse(localStorage.getItem(KS)||'{}'));}catch(e){st={shop:{},logs:{},dones:{},rolls:{}};}
+  if(!cfg.start){cfg.start=todayStr();saveCfg();}
+  if(!st.since){st.since=Date.now();saveSt();}
+}
+// ask the browser not to auto-clear our data
+async function askPersist(){try{if(navigator.storage&&navigator.storage.persist&&!(await navigator.storage.persisted()))await navigator.storage.persist();}catch(e){}}
+function hasData(){return Object.keys(st.logs).length||Object.keys(st.dones).length;}
+function checkBackup(){
+  const last=st.lastBackup||st.since, days=Math.floor((Date.now()-last)/864e5);
+  const show=hasData()&&days>=14&&!(st.snooze&&Date.now()<st.snooze);
+  $('#backupTip').classList.toggle('hidden',!show);$('#tipDays').textContent=days;
+}
+function markBackedUp(){st.lastBackup=Date.now();st.snooze=0;saveSt();checkBackup();}
+function downloadBackup(){const blob=new Blob([exportData()],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`开心起来吧-备份-${todayStr()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);markBackedUp();toast('已导出 ♡');}
+function saveCfg(){try{localStorage.setItem(KC,JSON.stringify(cfg));}catch(e){toast('保存失败：浏览器不允许存储');}}
+function saveSt(){try{localStorage.setItem(KS,JSON.stringify(st));}catch(e){toast('保存失败：浏览器不允许存储');}}
+
+// ================= 渲染：头部 & 今天 =================
+const DAYN=['周一','周二','周三','周四','周五','周六','周日'];
+const MEALN=['早','午','晚'], MEALC=['B','L','D'];
+const FREE={n:'自由餐',min:0};
+const rec=id=>id==='free'?FREE:(cfg.recipes[id]||{n:'（已删除）',min:0});
+function dayN(){return Math.floor((new Date(todayStr())-new Date(cfg.start))/864e5)+1;}
+
+function mealCard(id,i){const r=rec(id);const t=r.reheat?'热一下就好':r.min?'动手 '+r.min+' 分':(id==='free'?'想吃啥吃啥 ♪':'不用做饭');
+  return `<div class="meal ${MEALC[i]}" data-r="${esc(id)}"><span class="t">${MEALN[i]}</span><div class="n">${esc(r.n)}</div><div class="tagp">${t}</div></div>`;}
+
+function renderHeader(){
+  const n=dayN(), dur=+cfg.duration||30, pad=v=>String(v).padStart(3,'0');
+  $('#dayNum').textContent=pad(Math.max(1,Math.min(n,dur)));$('#dayTot').textContent=pad(dur);
+  $('#neon').classList.toggle('cleared',n>dur);
+  $('#titleText').textContent=cfg.title||'开心起来吧'; document.title=cfg.title||'开心起来吧';
+  $('#subText').textContent=cfg.sub||'';
+}
+function renderToday(){
+  const d=dow();
+  $('#todayTitle').innerHTML=`今天吃什么 · ${DAYN[d]}<small>${DAYJ[d]}ようびのごはん</small>`;
+  $('#today').innerHTML=cfg.menu[d].map(mealCard).join('');
+  const dn=$('#today .meal:last-child');if(dn&&cfg.menu[d][2]!=='free')dn.insertAdjacentHTML('beforeend','<div class="burst" style="right:-14px;top:-22px;width:58px;height:58px">本日の<br>おすすめ</div>');
+}
+function renderWeek(){
+  const d=dow();
+  $('#days').innerHTML=cfg.menu.map((ms,i)=>`<div class="dayrow ${i===d?'now':''}"><div class="dl"><span class="d">${DAYN[i]}</span>${i===d?'<small>きょう</small>':''}</div><div class="ms">${ms.map(mealCard).join('')}</div></div>`).join('');
+  const total=cfg.menu.flat().filter(id=>id!=='free').reduce((s,id)=>{const r=rec(id);return s+(r.reheat?0:(+r.min||0));},0);
+  $('#cookTotal').innerHTML=(cfg.prep?esc(cfg.prep)+'<br>':'')+`按这个菜单，一周真正动手做饭大约 <b>${total} 分钟</b>。`;
+}
+function bindMeals(){document.querySelectorAll('.meal').forEach(m=>m.onclick=()=>openRecipe(m.dataset.r));}
+
+// ================= 小事 & 积分卡 =================
+function cats(){return Object.keys(cfg.pool).filter(c=>cfg.pool[c]&&cfg.pool[c].length);}
+function pickToday(){
+  const key=todayStr(), roll=st.rolls[key]||0, cs=cats(); if(!cs.length)return [];
+  const r=seedRand(+key.replace(/-/g,'')*7+roll*131);
+  let chosen=cs.slice().sort(()=>r()-.5);
+  const out=[];let i=0;
+  while(out.length<4&&i<12){const c=chosen[i%chosen.length];const a=cfg.pool[c];const it=a[Math.floor(r()*a.length)];if(!out.some(o=>o[1]===it[0]))out.push([c,...it]);i++;}
+  return out;
+}
+function renderSmall(){
+  const items=pickToday(), dn=st.dones[todayStr()]||{};
+  $('#small').innerHTML=items.length?items.map(([c,a,b])=>`<div class="memo ${dn[a]?'done':''}" data-a="${esc(a)}"><div class="cat">${esc(c)}</div><b>${esc(a)}</b><span>${esc(b||'')}</span><div class="stamp">できた</div></div>`).join(''):'<p class="sub">小事清单是空的，去「✎ 自定义」里加几件吧。</p>';
+  document.querySelectorAll('.memo').forEach(m=>m.onclick=()=>{const k=todayStr();const d=Object.assign({},st.dones[k]||{});d[m.dataset.a]=!d[m.dataset.a];st.dones[k]=d;saveSt();m.classList.toggle('done');renderCard();if(d[m.dataset.a])toast('できた！好棒 ♡');});
+}
+function renderCard(){
+  const dur=+cfg.duration||30, s0=cfg.start, td=todayStr();let c=0,h='';
+  for(let i=0;i<dur;i++){const dt=addDays(s0,i);const on=st.dones[dt]&&Object.values(st.dones[dt]).some(Boolean);if(on)c++;
+    h+=`<div class="cell ${on?'on':''} ${dt===td?'today':''}" title="${dt}">${on?'できた':i+1}</div>`;}
+  $('#cells').innerHTML=h;$('#cardCount').textContent=`${c} / ${dur}`;$('#cardNo').textContent='No. '+s0.replace(/-/g,'');
+}
+function renderPool(){$('#pool').innerHTML=cats().map(c=>`<h3>${esc(c)}</h3><div class="chips">${cfg.pool[c].map(([a])=>`<span>${esc(a)}</span>`).join('')}</div>`).join('');}
+
+// ================= 买菜 =================
+function renderShop(){
+  let total=0,done=0;
+  $('#shopList').innerHTML=cfg.shop.map(([cat,items])=>`<h3>${esc(cat)}</h3>`+items.map(([nm,qq])=>{const k=cat+'/'+nm;total++;if(st.shop[k])done++;return `<label class="${st.shop[k]?'done':''}"><input type="checkbox" data-k="${esc(k)}" ${st.shop[k]?'checked':''}><span>${esc(nm)}</span><span class="q">${esc(qq||'')}</span></label>`;}).join('')).join('');
+  $('#shopBar').style.width=(total?done/total*100:0)+'%';
+  $('#shopCount').textContent=`${done} / ${total} 点`;
+  const t=new Date();$('#rDate').textContent=`${t.getFullYear()}/${String(t.getMonth()+1).padStart(2,'0')}/${String(t.getDate()).padStart(2,'0')} (${DAYJ[dow()]})`;
+  if(!$('#barcode').innerHTML){const r=seedRand(20031106);let x=4,h='';while(x<214){const w=1+Math.floor(r()*3);h+=`<rect x="${x}" y="0" width="${w}" height="40" fill="#6b4a3e"/>`;x+=w+1+Math.floor(r()*3);}$('#barcode').innerHTML=h+'<text x="110" y="46" font-size="6" text-anchor="middle" fill="#a08679" font-family="monospace">4 902102 ♡ 030 117</text>';}
+  $('#pantry').textContent=cfg.pantry||'';
+}
+
+// ================= 菜谱书 =================
+const PSTK=['onigiri','egg','strawberry','tomato','bowl','milk','mushroom','flower','tea','star','heart','cloud'];
+const TAPES=['#ffd0dc','#c9efdd','#fff0b3','#e3d8f8','#cfe8fb'];
+let bookPos=0;
+const single=()=>matchMedia('(max-width:640px)').matches;
+const BOOK=()=>Object.keys(cfg.recipes);
+const NP=()=>BOOK().length+1;
+function pageHTML(i){
+  const B=BOOK();
+  if(i<0||i>=NP()) return `<div class="kicker">おしまい</div><h3>今天也吃饱饱 ♡</h3><p class="sub">菜谱到这里就结束啦。<br>想加新菜，点上面的「✎ 自定义」。</p>`;
+  const tape=`<div class="tape" style="background:${TAPES[i%TAPES.length]}"></div>`;
+  if(i===0) return tape+`<div class="kicker" style="margin-top:8px">かんたんレシピ</div><div class="cover-t">我的懒人菜谱</div><p class="sub" style="margin:2px 0 8px">一共 ${B.length} 道</p><span class="sec p">目录 もくじ</span><ul class="toc">${B.map((k,j)=>`<li data-k="${esc(k)}">${esc(cfg.recipes[k].n)}<span>${String(j+1).padStart(2,'0')}</span></li>`).join('')}</ul><div class="corner"></div><div class="pn">— 00 —</div>`;
+  const r=cfg.recipes[B[i-1]];
+  return tape+`<div class="pstk">${STK[PSTK[(i-1)%PSTK.length]].replace('<svg','<svg width="58"')}</div>
+    <div class="kicker">RECIPE No.${String(i).padStart(2,'0')}</div><h3>${esc(r.n)}</h3>
+    <div class="tags">${r.type?`<span class="tag">${esc(r.type)}</span>`:''}${r.min?`<span class="tag">⏱ ${+r.min} 分钟</span>`:''}</div>
+    <span class="sec">材料 ざいりょう</span><div class="ing">${(r.ing||[]).map(x=>'· '+esc(x)).join('<br>')}</div>
+    <span class="sec p">做法 つくりかた</span><ol>${(r.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>
+    <div class="corner"></div><div class="pn">— ${String(i).padStart(2,'0')} —</div>`;
+}
+function paintBook(){
+  const n=NP();
+  if(single()){bookPos=Math.min(bookPos,n-1);$('#pL').innerHTML=pageHTML(bookPos);$('#pR').innerHTML='';$('#pageNo').textContent=`${bookPos+1} / ${n}`;}
+  else{bookPos-=bookPos%2;$('#pL').innerHTML=pageHTML(bookPos);$('#pR').innerHTML=pageHTML(bookPos+1);$('#pageNo').textContent=`${bookPos/2+1} / ${Math.ceil(n/2)}`;}
+  $('#prevP').disabled=bookPos<=0;$('#nextP').disabled=bookPos+(single()?1:2)>=n;
+  $('#prevP').style.opacity=bookPos<=0?.4:1;$('#nextP').style.opacity=$('#nextP').disabled?.4:1;
+  document.querySelectorAll('.toc li').forEach(li=>li.onclick=e=>{e.stopPropagation();goRecipe(li.dataset.k);});
+}
+async function turn(dir,target){
+  const one=single(),step=one?1:2,to=target!=null?target:bookPos+dir*step,sp=$('#spread');
+  if(to<0||to>=NP()||sp.classList.contains('flipping'))return;
+  sp.classList.add('flipping');
+  try{
+    if(one){const pg=$('#pL');
+      await pg.animate([{opacity:1,transform:'translateX(0)'},{opacity:0,transform:`translateX(${-dir*24}px)`}],{duration:160,easing:'ease-in'}).finished;
+      bookPos=to;paintBook();
+      await pg.animate([{opacity:0,transform:`translateX(${dir*24}px)`},{opacity:1,transform:'translateX(0)'}],{duration:180,easing:'ease-out'}).finished;
+    }else{
+      const L=to,Rr=to+1,leaf=document.createElement('div');leaf.className='leaf '+(dir>0?'r':'l');
+      leaf.innerHTML=`<div class="page face ${dir>0?'right':'left'}">${dir>0?pageHTML(bookPos+1):pageHTML(bookPos)}</div><div class="page face back ${dir>0?'left':'right'}">${dir>0?pageHTML(L):pageHTML(Rr)}</div>`;
+      sp.appendChild(leaf);
+      if(dir>0)$('#pR').innerHTML=pageHTML(Rr);else $('#pL').innerHTML=pageHTML(L);
+      await leaf.animate([{transform:'rotateY(0deg)'},{transform:`rotateY(${dir>0?-180:180}deg)`}],{duration:650,easing:'cubic-bezier(.45,.05,.35,1)'}).finished;
+      bookPos=to;paintBook();leaf.remove();
+    }
+  }catch(e){bookPos=to;paintBook();sp.querySelectorAll('.leaf').forEach(x=>x.remove());}
+  sp.classList.remove('flipping');
+}
+function goRecipe(k){const i=BOOK().indexOf(k)+1;if(i<1)return;const t=single()?i:i-i%2;if(t===bookPos)return;turn(t>bookPos?1:-1,t);}
+function openRecipe(id){
+  if(id==='free'){toast('自由餐：想吃什么就吃 ♪');return;}
+  const i=BOOK().indexOf(id)+1;if(i<1)return;
+  show('recipes');bookPos=single()?i:i-i%2;paintBook();$('#spread').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ================= 记录 =================
+let curMood=0;
+function paintScales(){document.querySelectorAll('.scale[data-s=mood] button').forEach(b=>b.classList.toggle('on',+b.dataset.i===curMood));}
+function loadLog(){const e=st.logs[$('#lDate').value]||{};$('#lWeight').value=e.weight??'';curMood=e.mood||0;paintScales();}
+function renderLog(){
+  if(!$('#lDate').value){$('#lDate').value=todayStr();loadLog();}
+  const rows=Object.values(st.logs).sort((a,b)=>a.date<b.date?-1:1);
+  if(!rows.length){$('#lChart').innerHTML='<p class="sub">还没有记录 ♡</p>';$('#lTable').innerHTML='';return;}
+  $('#lChart').innerHTML=chart(rows);
+  const me='🌧️,☁️,⛅,🌤️,🌈'.split(',');
+  $('#lTable').innerHTML='<tr><th>日期</th><th>体重</th><th>心情</th><th></th></tr>'+rows.slice().reverse().map(r=>`<tr><td>${r.date.slice(5)}</td><td>${r.weight??''}</td><td>${r.mood?me[r.mood-1]:''}</td><td><a href="#" data-del="${r.date}" style="color:var(--soft);font-size:12px">删除</a></td></tr>`).join('');
+  document.querySelectorAll('[data-del]').forEach(a=>a.onclick=ev=>{ev.preventDefault();if(a.dataset.c!=='1'){a.dataset.c='1';a.textContent='确认？';return;}delete st.logs[a.dataset.del];saveSt();renderLog();});
+}
+function chart(rows){
+  const W=700,H=220,L=40,Rr=40,T=14,B=28,dates=rows.map(r=>r.date);
+  const t0=new Date(dates[0]).getTime(),t1=new Date(dates[dates.length-1]).getTime(),tr=t1-t0||1;
+  const x=d=>dates.length===1?(L+W-Rr)/2:L+(new Date(d).getTime()-t0)/tr*(W-L-Rr);
+  const ws=rows.filter(r=>r.weight!=null);let g='';const y5=v=>T+(5-v)/4*(H-T-B);
+  [1,3,5].forEach(v=>g+=`<line x1="${L}" x2="${W-Rr}" y1="${y5(v)}" y2="${y5(v)}" stroke="#f2cbd6" stroke-dasharray="4 4"/><text x="${W-Rr+6}" y="${y5(v)+4}" font-size="11" fill="#a08679">${v}</text>`);
+  if(ws.length){const vs=ws.map(r=>r.weight);let mn=Math.min(...vs),mx=Math.max(...vs);const pd=(mx-mn)*.25||1;mn-=pd;mx+=pd;const yw=v=>T+(mx-v)/(mx-mn)*(H-T-B);
+    [mn,(mn+mx)/2,mx].forEach(v=>g+=`<text x="${L-6}" y="${yw(v)+4}" font-size="11" text-anchor="end" fill="#e2789a">${v.toFixed(1)}</text>`);g+=line(ws.map(r=>[x(r.date),yw(r.weight)]),'#e2789a');}
+  const s=rows.filter(r=>r.mood);if(s.length)g+=line(s.map(r=>[x(r.date),y5(r.mood)]),'#9a83cf');
+  const step=Math.max(1,Math.ceil(dates.length/7));
+  dates.forEach((d,i)=>{if(i%step===0||i===dates.length-1)g+=`<text x="${x(d)}" y="${H-8}" font-size="11" text-anchor="${dates.length>1&&i===0?'start':dates.length>1&&i===dates.length-1?'end':'middle'}" fill="#a08679">${d.slice(5)}</text>`;});
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%">${g}</svg>`;
+}
+function line(pts,c){return `<path d="${pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join('')}" fill="none" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="#fff" stroke="${c}" stroke-width="2.5"/>`).join('');}
+
+// ================= 自定义 =================
+const DURS=[7,14,21,30,60,90];
+let editDur=30;
+function listToText(list){return list.map(([c,items])=>'## '+c+'\n'+items.map(([a,b])=>b?`${a} | ${b}`:a).join('\n')).join('\n\n');}
+function textToList(t){const out=[];let cur=null;t.split('\n').forEach(l=>{l=l.trim();if(!l)return;if(l.startsWith('#')){cur=[l.replace(/^#+\s*/,'')||'未命名',[]];out.push(cur);return;}if(!cur){cur=['其他',[]];out.push(cur);}const [a,...b]=l.split('|');cur[1].push([a.trim(),b.join('|').trim()]);});return out.filter(([,i])=>i.length);}
+function renderDur(){$('#durChips').innerHTML=DURS.map(v=>`<button type="button" class="chip ${v===editDur?'on':''}" data-d="${v}">${v} 天</button>`).join('');$('#durInput').value=DURS.includes(editDur)?'':editDur;}
+function renderEdit(){
+  $('#eTitle').value=cfg.title;$('#eSub').value=cfg.sub;$('#startDate').value=cfg.start;$('#ePrep').value=cfg.prep||'';
+  editDur=+cfg.duration||30;renderDur();
+  renderRecipeEd();renderMenuEd();
+  $('#eShop').value=listToText(cfg.shop);$('#ePantry').value=cfg.pantry||'';
+  $('#ePool').value=listToText(Object.entries(cfg.pool));
+}
+function renderRecipeEd(){
+  $('#recipeEd').innerHTML=BOOK().map(k=>`<div class="rrow" data-k="${esc(k)}"><b>${esc(cfg.recipes[k].n)}</b><button class="pill ghost sm" data-act="edit">编辑</button><button class="pill ghost sm" data-act="del">删除</button></div>`).join('')||'<p class="sub">还没有菜谱。</p>';
+}
+function recipeForm(k){
+  const r=k?cfg.recipes[k]:{n:'',type:'',min:10,reheat:false,ing:[],steps:[]};
+  return `<div class="rform" data-k="${esc(k||'')}">
+    <div class="two"><label>菜名<input type="text" name="n" value="${esc(r.n)}" maxlength="24"></label><label>标签<input type="text" name="type" value="${esc(r.type)}" placeholder="快手 / 一锅煮"></label><label>动手分钟<input type="text" name="min" inputmode="numeric" value="${+r.min||0}"></label></div>
+    <label style="flex-direction:row;align-items:center;gap:6px"><input type="checkbox" name="reheat" ${r.reheat?'checked':''}> 只需要加热（不算进做饭时间）</label>
+    <label>材料（每行一样）<textarea name="ing" rows="4">${esc((r.ing||[]).join('\n'))}</textarea></label>
+    <label>做法（每行一步）<textarea name="steps" rows="4">${esc((r.steps||[]).join('\n'))}</textarea></label>
+    <div class="row"><button class="pill" data-act="save" style="background:var(--pink);color:#fff">保存菜谱</button><button class="pill ghost" data-act="cancel">取消</button></div></div>`;
+}
+function renderMenuEd(){
+  const opts=sel=>`<option value="free" ${sel==='free'?'selected':''}>自由餐</option>`+BOOK().map(k=>`<option value="${esc(k)}" ${k===sel?'selected':''}>${esc(cfg.recipes[k].n)}</option>`).join('');
+  $('#menuEd').innerHTML=`<div class="mrow"><span></span>${MEALN.map(m=>`<b style="text-align:center">${m}</b>`).join('')}</div>`+cfg.menu.map((row,i)=>`<div class="mrow"><b>${DAYN[i]}</b>${row.map((id,j)=>`<select data-d="${i}" data-m="${j}">${opts(id)}</select>`).join('')}</div>`).join('');
+}
+function sanitizeCfg(c){
+  const d=clone(DEFAULT), o=Object.assign(d,c||{});
+  if(!o.recipes||typeof o.recipes!=='object')o.recipes={};
+  if(!Array.isArray(o.menu)||o.menu.length!==7)o.menu=clone(DEFAULT.menu);
+  o.menu=o.menu.map(r=>[0,1,2].map(j=>{const id=(r||[])[j];return id==='free'||o.recipes[id]?id:'free';}));
+  if(!Array.isArray(o.shop))o.shop=[];if(!o.pool||typeof o.pool!=='object')o.pool={};
+  o.duration=Math.min(365,Math.max(1,+o.duration||30));
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(o.start||''))o.start=todayStr();
+  return o;
+}
+function exportData(){return JSON.stringify({app:'happy-plan',v:1,cfg,st},null,1);}
+function importData(txt){
+  try{const o=JSON.parse(txt);if(!o.cfg)throw 0;cfg=sanitizeCfg(o.cfg);st=Object.assign({shop:{},logs:{},dones:{},rolls:{}},o.st||{});saveCfg();saveSt();renderEverything();renderEdit();toast('导入成功 ♡');}
+  catch(e){toast('这不是有效的备份');}
+}
+
+// ================= nav =================
+const VIEWS=['today','week','shop','recipes','mood','log','edit'];
+function show(v){
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  VIEWS.forEach(x=>$('#v-'+x).classList.toggle('hidden',x!==v));
+  if(v==='edit')renderEdit();
+  window.scrollTo({top:v==='edit'?$('#v-edit').offsetTop-10:window.scrollY});
+}
+function renderEverything(){renderHeader();renderToday();renderWeek();renderSmall();renderCard();renderPool();renderShop();paintBook();renderLog();
+  $('#foods').innerHTML=FOODS.map(([a,b])=>`<div class="food"><b>${a}</b>${b}</div>`).join('');bindMeals();}
+
+function placeStickers(root=document){root.querySelectorAll('.stk[data-s]').forEach(el=>{if(el.dataset.done)return;el.dataset.done=1;el.innerHTML=STK[el.dataset.s];el.firstChild.setAttribute('width',el.dataset.w||50);});}
+function placeDeco(){
+  const r=seedRand(614);let h='';const kinds=['star','heart','sparkle','flower','strawberry','cloud','onigiri','tomato'],cols=['#f5a3bb','#9fd8c2','#ffd76a','#c6b3ea','#a9d4f5'];
+  for(let i=0;i<26;i++){const side=i%2?'left':'right',x=(r()*11).toFixed(1),y=(r()*96).toFixed(1);
+    if(i%3===0){const k=kinds[Math.floor(r()*kinds.length)];h+=`<div class="dk" style="${side}:${x}vw;top:${y}vh;transform:rotate(${Math.floor(r()*40-20)}deg)">${STK[k].replace('<svg',`<svg width="${28+Math.floor(r()*20)}"`)}</div>`;}
+    else h+=`<span class="sp" style="${side}:${x}vw;top:${y}vh;color:${cols[i%cols.length]};font-size:${12+Math.floor(r()*14)}px">${['✦','♡','✿','★','✧','♪'][i%6]}</span>`;}
+  $('#deco').innerHTML=h;
+}
+
+function wire(){
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+  $('#editBtn').onclick=()=>show('edit');$('#editDone').onclick=()=>show('today');
+  // mood scale
+  const sc=$('.scale[data-s=mood]');sc.innerHTML=sc.dataset.e.split(',').map((e,i)=>`<button type="button" data-i="${i+1}">${e}</button>`).join('');
+  sc.onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i;curMood=curMood===i?0:i;paintScales();};
+  $('#lDate').addEventListener('change',loadLog);
+  $('#lSave').onclick=()=>{const d=$('#lDate').value,w=$('#lWeight').value;if(!d||(w===''&&!curMood)){toast('填一项就行');return;}
+    const e={date:d};if(w!=='')e.weight=+w;if(curMood)e.mood=curMood;st.logs[d]=e;saveSt();renderLog();toast('记下了 ♡');};
+  // shop
+  $('#shopList').addEventListener('change',e=>{const k=e.target.dataset.k;if(!k)return;if(e.target.checked)st.shop[k]=true;else delete st.shop[k];saveSt();renderShop();});
+  $('#shopReset').onclick=()=>{st.shop={};saveSt();renderShop();};
+  // small
+  $('#reroll').onclick=()=>{const k=todayStr();st.rolls[k]=(st.rolls[k]||0)+1;saveSt();renderSmall();};
+  // book
+  $('#prevP').onclick=()=>turn(-1);$('#nextP').onclick=()=>turn(1);
+  document.addEventListener('keydown',e=>{if($('#v-recipes').classList.contains('hidden'))return;if(e.key==='ArrowRight')turn(1);if(e.key==='ArrowLeft')turn(-1);});
+  $('#spread').addEventListener('click',e=>{if(e.target.closest('.toc'))return;const pg=e.target.closest('.page');if(!pg)return;if(single()){turn(1);return;}turn(pg.id==='pR'?1:-1);});
+  matchMedia('(max-width:640px)').addEventListener('change',()=>paintBook());
+  // edit: basic
+  $('#durChips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;editDur=+b.dataset.d;renderDur();};
+  $('#durInput').oninput=e=>{const v=Math.round(+e.target.value);if(v>=1&&v<=365){editDur=v;document.querySelectorAll('#durChips .chip').forEach(c=>c.classList.toggle('on',+c.dataset.d===v));}};
+  $('#saveBasic').onclick=()=>{cfg.title=$('#eTitle').value.trim()||'开心起来吧';cfg.sub=$('#eSub').value.trim();cfg.duration=editDur;if($('#startDate').value)cfg.start=$('#startDate').value;cfg.prep=$('#ePrep').value.trim();saveCfg();renderEverything();toast('已保存 ♡');};
+  $('#restart').onclick=()=>{const b=$('#restart');if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='确定？再点一次';return;}b.dataset.c='';b.textContent='从今天重新开始';cfg.start=todayStr();saveCfg();renderEverything();renderEdit();toast('新的一轮开始啦 ✿');};
+  // edit: recipes
+  $('#addRecipe').onclick=()=>{if($('#recipeEd .rform[data-k=""]'))return;$('#recipeEd').insertAdjacentHTML('afterbegin',recipeForm(null));$('#recipeEd .rform input').focus();};
+  $('#recipeEd').addEventListener('click',e=>{
+    const btn=e.target.closest('[data-act]');if(!btn)return;const act=btn.dataset.act;
+    if(act==='edit'){const row=btn.closest('.rrow');if(row.nextElementSibling&&row.nextElementSibling.classList.contains('rform'))return;row.insertAdjacentHTML('afterend',recipeForm(row.dataset.k));return;}
+    if(act==='del'){const row=btn.closest('.rrow');if(btn.dataset.c!=='1'){btn.dataset.c='1';btn.textContent='确认删除';return;}const k=row.dataset.k;delete cfg.recipes[k];cfg.menu=cfg.menu.map(r=>r.map(id=>id===k?'free':id));saveCfg();renderRecipeEd();renderMenuEd();renderEverything();toast('已删除');return;}
+    const f=btn.closest('.rform');
+    if(act==='cancel'){f.remove();return;}
+    if(act==='save'){
+      const g=n=>f.querySelector(`[name=${n}]`);const name=g('n').value.trim();if(!name){toast('写个菜名吧');return;}
+      const k=f.dataset.k||('r'+Date.now().toString(36));
+      cfg.recipes[k]={n:name,type:g('type').value.trim(),min:Math.max(0,Math.round(+g('min').value)||0),reheat:g('reheat').checked,
+        ing:g('ing').value.split('\n').map(x=>x.trim()).filter(Boolean),steps:g('steps').value.split('\n').map(x=>x.trim()).filter(Boolean)};
+      saveCfg();renderRecipeEd();renderMenuEd();renderEverything();toast('菜谱已保存 ♡');
+    }
+  });
+  // edit: menu
+  $('#saveMenu').onclick=()=>{document.querySelectorAll('#menuEd select').forEach(s=>{cfg.menu[+s.dataset.d][+s.dataset.m]=s.value;});saveCfg();renderEverything();toast('菜单已保存 ♡');};
+  // edit: shop & pool
+  $('#saveShop').onclick=()=>{cfg.shop=textToList($('#eShop').value);cfg.pantry=$('#ePantry').value.trim();saveCfg();renderShop();$('#eShop').value=listToText(cfg.shop);toast('买菜清单已保存 ♡');};
+  $('#savePool').onclick=()=>{const l=textToList($('#ePool').value);if(!l.length){toast('至少留一件小事吧');return;}cfg.pool=Object.fromEntries(l);saveCfg();renderSmall();renderPool();$('#ePool').value=listToText(Object.entries(cfg.pool));toast('小事清单已保存 ♡');};
+  // backup
+  $('#exportBtn').onclick=downloadBackup;$('#tipExport').onclick=downloadBackup;
+  $('#tipLater').onclick=()=>{st.snooze=Date.now()+3*864e5;saveSt();checkBackup();};
+  $('#copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(exportData());markBackedUp();toast('已复制，粘贴到备忘录保存好');}catch(e){$('#importBox').value=exportData();$('#importBox').select();toast('复制不了，已放进下面的框里');}};
+  $('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>importData(rd.result);rd.readAsText(f);e.target.value='';};
+  $('#importText').onclick=()=>importData($('#importBox').value);
+  $('#resetAll').onclick=()=>{const b=$('#resetAll');if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='会清空你改过的内容，再点一次';return;}b.dataset.c='';b.textContent='恢复默认内容';const s0=cfg.start,dur=cfg.duration;cfg=clone(DEFAULT);cfg.start=s0;cfg.duration=dur;saveCfg();renderEverything();renderEdit();toast('已恢复默认');};
+}
+
+load(); wire(); placeStickers(); placeDeco(); renderEverything(); checkBackup(); askPersist();
+
+</script>
+</body>
+</html>
