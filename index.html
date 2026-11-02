@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>开心起来吧</title>
+<title>Cheer Up Mart</title>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="开心起来吧">
+<meta name="apple-mobile-web-app-title" content="Cheer Up Mart">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&family=DotGothic16&family=Mochiy+Pop+One&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -283,7 +283,7 @@ footer .dot{color:var(--pinkD)}
   .board .stk[data-s="egg"]{display:none}
   .board .stk[data-s="onigiri"]{right:12px!important;top:40px!important}
   .board .stk[data-s="onigiri"] svg{width:48px}
-  .board .burst{left:auto!important;right:64px!important;top:52px!important;width:44px!important;height:44px!important;font-size:8px!important}
+  .board .burst{display:none}
   .neonwrap{margin-top:8px;gap:6px}
   .neon{padding:3px 12px 2px}
   .neon b{font-size:20px}
@@ -330,8 +330,8 @@ footer .dot{color:var(--pinkD)}
 
   <div class="board">
     <div class="kana">げんきだしてね ✿ CHEER UP PLAN</div>
-    <h1 class="title"><span class="hl" id="titleText">开心起来吧</span></h1>
-    <div class="burst" style="left:276px;top:38px;width:54px;height:54px;font-size:9px">NEW!<br>新登場</div>
+    <h1 class="title"><span class="hl" id="titleText">Cheer Up Mart</span></h1>
+    <div class="burst" style="left:430px;top:30px;width:54px;height:54px;font-size:9px">NEW!<br>新登場</div>
     <div class="sub" style="position:relative;z-index:1" id="subText">吃得简单 · 身体轻一点 · 心情亮一点</div>
     <div class="neonwrap"><div class="neon" id="neon">DAY <b id="dayNum">001</b><span class="sl">/</span><b id="dayTot">030</b><span class="hrt">♡</span><span class="clr">CLEAR!</span></div><span class="open">OPEN 24H</span><button class="pill ghost" id="editBtn" style="font-size:12px;padding:2px 12px">✎ 自定义</button></div>
     <div class="status" id="status">数据只保存在你自己的浏览器里 · 换设备记得先导出备份</div>
@@ -670,7 +670,7 @@ function buildDefaults(){
   const menu=MENU.map(row=>row.map(id=>id==='beefleft'?'eggrice':id));
   menu[3][1]='chickenbowl'; menu[4][1]='dumpling';
   return {
-    title:'开心起来吧', sub:'吃得简单 · 身体轻一点 · 心情亮一点', duration:30, start:'',
+    title:'Cheer Up Mart', sub:'吃得简单 · 身体轻一点 · 心情亮一点', duration:30, start:'',
     prep:'周末动手 5 分钟：电饭煲煮一锅饭，好了分盒冷冻；小锅煮 10 个鸡蛋放冰箱。两样都不用守着。',
     recipes, menu,
     shop:SHOP.map(([c,items])=>[c,items.map(([n,q])=>[n,q])]),
@@ -687,6 +687,7 @@ function load(){
   try{cfg=Object.assign(clone(DEFAULT),JSON.parse(localStorage.getItem(KC)||'{}'));}catch(e){cfg=clone(DEFAULT);}
   try{st=Object.assign({shop:{},logs:{},dones:{},rolls:{}},JSON.parse(localStorage.getItem(KS)||'{}'));}catch(e){st={shop:{},logs:{},dones:{},rolls:{}};}
   if(!cfg.start){cfg.start=todayStr();saveCfg();}
+  if(cfg.title==='开心起来吧'){cfg.title='Cheer Up Mart';saveCfg();}
   if(!st.since){st.since=Date.now();saveSt();}
 }
 // ask the browser not to auto-clear our data
@@ -698,7 +699,7 @@ function checkBackup(){
   $('#backupTip').classList.toggle('hidden',!show);$('#tipDays').textContent=days;
 }
 function markBackedUp(){st.lastBackup=Date.now();st.snooze=0;saveSt();checkBackup();}
-function downloadBackup(){const blob=new Blob([exportData()],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`开心起来吧-备份-${todayStr()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);markBackedUp();toast('已导出 ♡');}
+function downloadBackup(){const blob=new Blob([exportData()],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`CheerUpMart-备份-${todayStr()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);markBackedUp();toast('已导出 ♡');}
 function saveCfg(){try{localStorage.setItem(KC,JSON.stringify(cfg));}catch(e){toast('保存失败：浏览器不允许存储');}}
 function saveSt(){try{localStorage.setItem(KS,JSON.stringify(st));}catch(e){toast('保存失败：浏览器不允许存储');}}
 
@@ -716,7 +717,7 @@ function renderHeader(){
   const n=dayN(), dur=+cfg.duration||30, pad=v=>String(v).padStart(3,'0');
   $('#dayNum').textContent=pad(Math.max(1,Math.min(n,dur)));$('#dayTot').textContent=pad(dur);
   $('#neon').classList.toggle('cleared',n>dur);
-  $('#titleText').textContent=cfg.title||'开心起来吧'; document.title=cfg.title||'开心起来吧';
+  $('#titleText').textContent=cfg.title||'Cheer Up Mart'; document.title=cfg.title||'Cheer Up Mart';
   $('#subText').textContent=cfg.sub||'';
 }
 function renderToday(){
@@ -937,7 +938,7 @@ function wire(){
   // edit: basic
   $('#durChips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;editDur=+b.dataset.d;renderDur();};
   $('#durInput').oninput=e=>{const v=Math.round(+e.target.value);if(v>=1&&v<=365){editDur=v;document.querySelectorAll('#durChips .chip').forEach(c=>c.classList.toggle('on',+c.dataset.d===v));}};
-  $('#saveBasic').onclick=()=>{cfg.title=$('#eTitle').value.trim()||'开心起来吧';cfg.sub=$('#eSub').value.trim();cfg.duration=editDur;if($('#startDate').value)cfg.start=$('#startDate').value;cfg.prep=$('#ePrep').value.trim();saveCfg();renderEverything();toast('已保存 ♡');};
+  $('#saveBasic').onclick=()=>{cfg.title=$('#eTitle').value.trim()||'Cheer Up Mart';cfg.sub=$('#eSub').value.trim();cfg.duration=editDur;if($('#startDate').value)cfg.start=$('#startDate').value;cfg.prep=$('#ePrep').value.trim();saveCfg();renderEverything();toast('已保存 ♡');};
   $('#restart').onclick=()=>{const b=$('#restart');if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='确定？再点一次';return;}b.dataset.c='';b.textContent='从今天重新开始';cfg.start=todayStr();saveCfg();renderEverything();renderEdit();toast('新的一轮开始啦 ✿');};
   // edit: recipes
   $('#addRecipe').onclick=()=>{if($('#recipeEd .rform[data-k=""]'))return;$('#recipeEd').insertAdjacentHTML('afterbegin',recipeForm(null));$('#recipeEd .rform input').focus();};
