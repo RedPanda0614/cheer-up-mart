@@ -10,26 +10,23 @@
 </p>
 
 <p align="center">
-  <a href="https://redpanda0614.github.io/cheer-up-mart/"><img src="https://img.shields.io/badge/%F0%9F%8D%99_%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-%E7%82%B9%E6%88%91%E6%89%93%E5%BC%80-f37a9e?style=for-the-badge" alt="在线体验"></a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/%E4%BB%B7%E6%A0%BC-%E5%85%8D%E8%B4%B9-ffe08f?style=flat-square" alt="免费">
-  <img src="https://img.shields.io/badge/%E6%96%87%E4%BB%B6-%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA_HTML-b9e6cf?style=flat-square" alt="单文件">
-  <img src="https://img.shields.io/badge/%E6%B3%A8%E5%86%8C-%E4%B8%8D%E9%9C%80%E8%A6%81-ffc2d4?style=flat-square" alt="不用注册">
-  <img src="https://img.shields.io/badge/%E6%95%B0%E6%8D%AE-%E5%8F%AA%E5%AD%98%E5%9C%A8%E4%BD%A0%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8-d9c8f5?style=flat-square" alt="数据在本地">
-</p>
-
-<p align="center">
-  <a href="#-看看长什么样">看看长什么样</a> ·
-  <a href="#-马上用起来">马上用起来</a> ·
-  <a href="#-做一个自己的版本">做一个自己的版本</a> ·
-  <a href="#-关于数据">关于数据</a>
+  <a href="https://redpanda0614.github.io/cheer-up-mart/"><b>🍙 在线体验：redpanda0614.github.io/cheer-up-mart</b></a>
 </p>
 
 <p align="center">
   <img src="docs/cover.jpg" width="440" alt="Cheer Up Mart 封面">
 </p>
+
+---
+
+## 📖 目录
+
+- [🏪 看看长什么样](#-看看长什么样)
+- [🚀 马上用起来](#-马上用起来)
+- [🎨 做一个自己的版本](#-做一个自己的版本)
+- [💾 关于数据](#-关于数据)
+
+免费 · 只有一个 HTML 文件 · 不需要注册 · 数据只存在你自己的浏览器里
 
 ---
 
