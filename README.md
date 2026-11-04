@@ -34,6 +34,11 @@
 
 <table>
   <tr>
+    <td width="33%" align="center"><img src="docs/today.jpg" alt="今天吃什么"><br><b>🍙 今天吃什么</b><br><sub>三餐排好，最多动手 10 分钟</sub></td>
+    <td width="33%" align="center"><img src="docs/week.jpg" alt="一周菜单"><br><b>📅 一周菜单</b><br><sub>每周循环，不用每天想</sub></td>
+    <td width="33%" align="center"><img src="docs/shop.jpg" alt="买菜清单"><br><b>🧺 买菜清单</b><br><sub>周末买一次，买到就打勾</sub></td>
+  </tr>
+  <tr>
     <td width="33%" align="center"><img src="docs/phone.jpg" alt="手机上也好用"><br><b>📱 手机上也好用</b><br><sub>加到桌面，像 App 一样打开</sub></td>
     <td width="33%" align="center"><img src="docs/recipes.jpg" alt="菜谱小本子"><br><b>📖 菜谱小本子</b><br><sub>一页一道菜，点着往后翻</sub></td>
     <td width="33%" align="center"><img src="docs/tasks.jpg" alt="每日小事"><br><b>✿ 今天的小事</b><br><sub>随机抽几件，做完盖个章</sub></td>
@@ -45,9 +50,6 @@
   </tr>
 </table>
 
-| 🍙 今天吃什么 | 🧺 买菜清单 | 📅 一周菜单 |
-| :---: | :---: | :---: |
-| 每顿 15 分钟左右能做完 | 周末买一次就够一周 | 三餐都排好了，不用每天想 |
 
 ---
 
