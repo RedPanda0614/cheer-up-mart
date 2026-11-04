@@ -70,8 +70,10 @@
 
 ## 🎨 做一个自己的版本
 
+分两步：先让 AI 把网页改成你的样子，再放到网上，手机就能打开。
+
 <details>
-<summary><b>🤖 方法一：交给 AI 搭子帮你改（推荐）</b></summary>
+<summary><b>🤖 第一步：让 AI 搭子改成你的版本</b></summary>
 <br>
 
 整个网站就是一个 `index.html` 文件，很适合交给 AI 改。豆包、Kimi、DeepSeek、ChatGPT、Claude 都可以。
@@ -91,34 +93,35 @@
 改完请把完整的 HTML 文件发回给我。
 ```
 
-3. 拿到新文件后，用电脑浏览器直接打开就能用。想用手机打开，可以照上面的步骤，也放到你自己的 GitHub Pages 上。
+3. 拿到新文件后，先用电脑浏览器打开看看。不满意就接着跟 AI 说，改到喜欢为止。
+4. 满意了就进入第二步，把它放到网上。
 
-小提示：网站里点「✎ 自定义」也能改菜谱、菜单、买菜清单和小事清单，简单的修改不用 AI 也行。
+小提示：只是改改菜谱、菜单、清单的话，网站里点「✎ 自定义」就行，可以跳过这一步，直接用上面的在线版本。
 
 </details>
 
 <details>
-<summary><b>🌐 方法二：用 GitHub Pages 免费上线（大约 5 分钟）</b></summary>
+<summary><b>🌐 第二步：用 GitHub Pages 免费放到网上（大约 5 分钟）</b></summary>
 <br>
 
 1. 登录 GitHub，点右上角 **+** → **New repository**。
    - 名字随便起，比如 `happy-plan`。
    - 选 **Public**，点 **Create repository**。
-2. 在新仓库页面点 **uploading an existing file**，把 `index.html` 和 `apple-touch-icon.png` 一起拖进去（这个 README 也可以一起传），点 **Commit changes**。
+2. 在新仓库页面点 **uploading an existing file**，把第一步改好的 `index.html` 和 `apple-touch-icon.png` 一起拖进去（这个 README 也可以一起传），点 **Commit changes**。
    - `apple-touch-icon.png` 就是主屏幕上的饭团图标，要和 `index.html` 放在同一层。
 3. 进入仓库的 **Settings** → 左边的 **Pages**。
    - **Source** 选 **Deploy from a branch**。
    - **Branch** 选 `main`，文件夹选 `/ (root)`，点 **Save**。
 4. 等 1 到 2 分钟，刷新这个页面，上面会出现网址：
    `https://你的用户名.github.io/happy-plan/`
-5. 把这个网址发给别人就行。
+5. 用手机打开这个网址，再加到桌面（方法见上面的「怎么加到手机桌面」），就和 App 一样了。
 
-以后想改内容，在仓库里点 `index.html` → 铅笔图标编辑，或者重新上传覆盖。保存后 1 到 2 分钟网站会自动更新。
+以后想再改，就让 AI 改好新文件，再上传覆盖 `index.html`。保存后 1 到 2 分钟网站会自动更新。
 
 </details>
 
 <details>
-<summary><b>📚 不会代码？看 8 张图文教程，从零手搓一个</b></summary>
+<summary><b>📚 想从零开始做一个完全不一样的？看 8 张图文教程</b></summary>
 <br>
 
 <table>
