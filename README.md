@@ -1,10 +1,54 @@
-# Cheer Up Mart
+<p align="center">
+  <img src="icon-512.png" width="120" alt="Cheer Up Mart 图标">
+</p>
 
-一个可爱的日式便利店风格小网站：每日菜单、买菜清单、翻书菜谱、每日随机小事、积分卡、体重和心情记录。
+<h1 align="center">Cheer Up Mart</h1>
 
-- 只有一个文件 `index.html`，不需要服务器，也不需要数据库。
+<p align="center">
+  日系便利店风的生活管理小网页 · 懒人友好 · ADHD 友好<br>
+  👉 <a href="https://redpanda0614.github.io/cheer-up-mart/"><b>直接打开试试</b></a>
+</p>
+
+<p align="center">
+  <img src="docs/before-after.jpg" width="420" alt="从第一版到现在的样子">
+</p>
+
+## 它能做什么
+
+- 🍙 **今天吃什么**：一周三餐排好了，每顿 15 分钟左右能做完。
+- 🧺 **买菜清单**：周末买一次就够一周，买到的打个勾。
+- 📖 **菜谱小本子**：一页一道菜，像翻书一样往后翻。
+- ✿ **今天的小事**：每天随机抽几件小事，做完点一下盖个章。
+- ✏️ **体重和心情**：想记就记，不想记也没关系。
+- 🏪 **DAY 霓虹招牌**：显示今天是计划的第几天。
+
+只有一个 `index.html`，打开就能用。不用注册，不用下载 App。
+
+## 截图
+
+<table>
+  <tr>
+    <td><img src="docs/cover.jpg" alt="封面"></td>
+    <td><img src="docs/phone.jpg" alt="手机上也好用"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/recipes.jpg" alt="菜谱小本子"></td>
+    <td><img src="docs/tasks.jpg" alt="每日小事"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/details.jpg" alt="便利店小细节"></td>
+    <td><img src="docs/log.jpg" alt="体重和心情"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/style.jpg" width="50%" alt="风格规范"></td>
+  </tr>
+</table>
+
+## 怎么用
+
+- 点右上角的「✎ 自定义」，可以改标题、计划天数、菜谱、一周菜单、买菜清单和小事清单。
 - 每个人的数据都只存在自己的浏览器里，别人看不到。
-- 点右上角的「✎ 自定义」可以改标题、计划天数、菜谱、一周菜单、买菜清单和小事清单。
+- 想要一份完全属于自己的版本，可以照下面的步骤放到你自己的 GitHub Pages 上，或者交给 AI 帮你改。
 
 ## 用 GitHub Pages 免费上线（大约 5 分钟）
 
@@ -36,7 +80,7 @@
 
 ```
 这是一个叫 Cheer Up Mart 的生活管理小网页，只有一个 HTML 文件。
-请帮我改成适合我的版本，保持现在的日式便利店风格和所有功能不变。
+请帮我改成适合我的版本，保持现在的日系便利店风格和所有功能不变。
 我的情况：
 - 我不吃：（比如 香菜、牛肉）
 - 我喜欢吃：（比如 面食、鸡蛋）
